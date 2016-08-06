@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>demo</title>
+    <!--引入React库-->
+    <!--<script src="http://apps.bdimg.com/libs/react/0.10.0/react.min.js"></script>-->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.3/react.js"></script>
+    <!--引入JSX转换库-->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.3/react-dom.js"></script>
+    <!--引入browser库-->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+    <!--组件样式-->
+</head>
+<body>
+<!--定义容器-->
+<div id="content"></div>
+
+<!--声明脚本类型为JSX-->
+<script type="text/babel">
+    var InnerComponent = React.createClass({
+        shouldComponentUpdate: function(nextProps, nextState) {
+              console.log('arguments:'+JSON.stringify(arguments[0].value.foo) + ',length:'+arguments.length);
+              console.log('nextProps:'+ JSON.stringify(nextProps) +',nextState:' + JSON.stringify(nextState)+',arguments:'+JSON.stringify(arguments));
+              console.log('this.props.value.foo:'+ JSON.stringify(this.props.value.foo) + ',nextProps.value.foo:' + JSON.stringify(nextProps.value.foo));
+              return this.props.value.foo !== nextProps.value.foo;
+        },
+          render: function() {
+            return (
+                  <div>
+                    {this.props.value.foo}
+                  </div>
+            );
+          }
+    });
+
+    var OutComponent = React.createClass({
+          getInitialState: function() {
+            return { value: { foo: 'bar' } };
+          },
+
+          onClick: function() {
+            var value = this.state.value;
+            value.foo += 'bar'; // ANTI-PATTERN!
+            console.log(value.foo);
+            this.setState({ value: value });
+          },
+
+          render: function() {
+            return (
+                  <div>
+                    <InnerComponent value={this.state.value} />
+                    <a onClick={this.onClick}>Click me</a>
+                  </div>
+            );
+          }
+    });
+
+    ReactDOM.render(<OutComponent />, document.querySelector("#content"));
+</script>
+<script>
+    (function(x){
+        var y = [1,2,3];
+        var q = arguments;//数组形式存放数据，并带有length属性
+        this.a=1;
+    })({ax:3});
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

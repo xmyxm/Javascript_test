@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		var com =function(){
+			var arr =[];
+			return function(obj){
+				if(obj){
+					arr.push(obj);
+				}
+				return arr;
+			}
+		} 
+
+		var a = com();
+		var b = com();
+		console.log(a('听说'));
+		console.log(b('你好'));
+	</script>
+
+<script type="text/javascript">
+	var fn = function(){
+		this.name = null;
+		this.setname = function (param){this.name = param}
+		return this;
+	}() 
+fn.setname("我给你改名了");
+console.log(fn.name);
+</script>
+
+
+<script type="text/javascript">
+	var funtime = function (){
+		var countNumber = 10;
+		var timeobj = null;
+		var isopen = false;
+        var openClock = function(){
+	          if(countNumber>0){
+				console.log(countNumber);
+				countNumber--;
+				isopen = true;
+			    timeobj = setTimeout(arguments.callee,1000);
+			}else{
+				 countNumber = 10;
+				 isopen = false;
+			     clearTimeout(timeobj);
+			}
+        };
+        var closeClock = function (){
+        	countNumber = 10;
+        	isopen = false;
+		    clearTimeout(timeobj);
+        };
+        var getstate = function (){
+            return isopen;
+        };
+        return {openClock:openClock,closeClock:closeClock,getstate:getstate};
+}();
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <style>
+        body,div{
+            padding: 0px;margin: 0px;
+        }
+    </style>
+</head>
+<body>
+<div id="cs" style="border: 1px solid red;margin-left:15px; ">
+    width:<input type="text" id="width"></br>
+    height:<input type="text" id="height"></br>
+    offsetLeft:<input type="text" id="offsetLeft" /></br>
+    offsetTop:<input type="text" id="offsetTop" /></br>
+    offsetParent:<input type="text" id="offsetParent" /></br>
+    offsetX:<input type="text" id="offsetX" /></br>
+    offsetY:<input type="text" id="offsetY" /></br>
+</div>
+<script>
+
+    document.getElementById('width').value = document.getElementById('cs').style.width;
+    document.getElementById('height').value = document.getElementById('cs').style.height;
+
+    var offsetLeft = document.getElementById('offsetLeft');
+    var offsetTop = document.getElementById('offsetTop');
+    var offsetParent = document.getElementById('offsetParent');
+    var offsetX = document.getElementById('offsetX');
+    var offsetY = document.getElementById('offsetY');
+    var offsetLeft = document.getElementById('offsetLeft');
+
+    function getMousePosition(e){
+        var e = e||window.event;
+        var objSrc = e.srcElement;//event source element
+        console.log(objSrc);
+        offsetLeft.value = objSrc.offsetLeft;
+        offsetTop.value = objSrc.offsetTop;
+        offsetParent.value = objSrc.offsetParent;
+        offsetX.value = e.offsetX;
+        offsetY.value = e.offsetY;
+    }
+    document.onmousemove = getMousePosition;
+</script>
+</body>
+</html>

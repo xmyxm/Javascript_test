@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Localstorage</title>
+</head>
+<body>
+<div>存储方式：
+    <select id="selectoption">
+        <option value="session">sessionStrage</option>
+        <option value="Local">Localstorage</option>
+    </select>
+    <textarea rows="3" cols="20" id="text"></textarea>
+    <input type="button" value="存储" id="SaveData">
+    <input type="button" value="读取" id="ReadData">
+    <input type="button" value="删除" id="DelData">
+    <input type="button" value="遍历" id="ForData">
+</div>
+<div>
+    <textarea rows="10" cols="20" id="fortext"></textarea>
+</div>
+<p>
+    备注：session即会话的意思，在这里的session是指用户浏览某个网站时，从进入网站到关闭网站这个时间段，session对象的有效期就只有这么长。
+    ② localStorage： 将数据保存在客户端硬件设备上，不管它是什么，意思就是下次打开计算机时候数据还在。
+    两者区别就是一个作为临时保存，一个长期保存。
+</p>
+<script>
+    window.onload=function(){
+        var sp=document.getElementById('selectoption');
+      document.getElementById('SaveData').onclick=function(){
+          if(sp.value=='session'){
+              sessionStorage.setItem('msg', ReadText());
+          }else{
+              localStorage.setItem('msg', ReadText());
+          }
+      };
+    document.getElementById('ReadData').onclick=function(){
+        if(sp.value=='session'){
+            WriteText(sessionStorage.getItem('msg'));
+        }else{
+            WriteText(localStorage.getItem('msg'));
+        }
+    };
+        document.getElementById('DelData').onclick=function(){
+            if(sp.value=='session'){
+               sessionStorage.removeItem('msg');
+            }else{
+               localStorage.removeItem('msg');
+            }
+        };
+        document.getElementById('ForData').onclick=function(){
+            var text=null;
+            if(sp.value=='session'){
+                for(var i=0;i<sessionStorage.length;i++){
+                    text+= sessionStorage.key(i)+'/t';
+                }
+            }else{
+                for(var i=0;i<sessionStorage.length;i++){
+                    text+=localStorage.key(i)+'/t';
+                }
+            }
+            document.getElementById('fortext').innerHTML=text;
+        };
+
+        function ReadText(){
+           return document.getElementById('text').value;
+        }
+        function WriteText(str){
+            document.getElementById('text').value=str;
+        }
+    }
+
+    function setlsItem(key,value,timeout,sign){
+
+        var entity={};
+    }
+</script>
+</body>
+</html>

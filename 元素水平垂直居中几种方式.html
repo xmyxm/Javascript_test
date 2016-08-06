@@ -1,0 +1,55 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>元素水平垂直居中</title> 
+<style type="text/css">
+body{
+background-color: white;
+}
+
+.box1{
+	position:absolute;
+	width: 500px;
+	height: 250px;
+	left: 50%;
+	top: 50%;
+	margin-left: -250px;/*调整偏移量*/
+	margin-top: -125px;/*建议使用 transform:translate(-50%,-50%);来调整偏移量*/
+	background-color: #DBDBDB;
+}
+
+.box2{
+	position:fixed;/*整页面居中建议使用fixed*/
+	height: 200px;
+	width: 300px;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	margin:auto;
+	background-color: #BCEE68;
+}
+
+ .box-min{
+	display: table-cell;/*非IE的主流浏览器识别的垂直居中的方法*/
+	vertical-align: middle;/*垂直居中属性*/
+	text-align:center;/*水平居中*/
+	*display: block;/*针对IE的hack*/
+	width: 200px;
+	height: 150px;
+	background-color: #9932CC;
+} 
+
+</style>
+</head>
+ 
+<body>
+<p>
+	fixed:固定定位，参照位置是浏览器窗口的左上角，即坐标点为(0px, 0px);
+	absolute:绝对定位，参展位置是离当前元素最近的定位方式为fixed,absolute,relative的祖先原则的左上角
+</p>
+<div class="box1"> </div>
+<div class="box2"> <div class="box-min"> </div> </div>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>setInterval</title>
+<style type="text/css">
+
+</style>
+</head>
+<body>
+
+<div>
+<script type="text/javascript">
+var bookArray = new Array();
+bookArray.push("围城");
+bookArray.push("平凡的世界");
+bookArray.push("汤姆叔叔的小屋");
+bookArray.push("尘埃落定");
+bookArray.push("生命从明天开始");
+
+console.log(bookArray.shift());//删除并返回第一个的值
+console.log(bookArray.pop());//删除数组的最后一个值
+bookArray.unshift("追寻逝去的时光","傲慢与偏见")
+console.log(JSON.stringify(bookArray));//在数组最前面插入值，并返回数组的长度
+
+bookArray.splice(0,3,"战争与和平","变形记","草叶集","格列佛游记");//删除起始位置，删除的个数，插入新的值
+console.log(JSON.stringify(bookArray));
+bookArray.reverse();//数组反序
+console.log(JSON.stringify(bookArray));
+bookArray.sort(function(a,b){ return a.length > b.length ? true:false });//数组排序
+console.log(JSON.stringify(bookArray));
+console.log(JSON.stringify(bookArray.slice(3,9)));//取出索引之间的集合
+bookArray.join("||");
+
+</script>
+</div>
+</body>
+</html>

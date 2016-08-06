@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>string的相关方法</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no,minimal-ui" />
+    <style type="text/css">
+      
+    </style>
+</head>
+    <body>
+<script type="text/javascript">
+	function imgTobase64 (img){
+		var canvas = document.createElement("canvas");
+		canvas.width = img.width;
+		canvas.height = img.height;
+        img.crossOrigin = "*";
+		var ctx = canvas.getContext("2d");
+		ctx.drawImage(img, 0, 0);
+	   return canvas.toDataURL("image/png");
+	}
+
+    var imgUrl='https://webresource.c-ctrip.com/resh5paymentcommononline/R1/dest/res/bankico/pay_ico_bank_1102.png?v='+(new Date()).valueOf();
+    function getImage(index,item){
+        imgSrc = imgUrl;
+        var img = new Image();
+        (function (img) {
+                img.onload = function () {
+                    imgTobase64(img);
+                };
+       })(img);
+        img.src = imgSrc;
+    }
+
+//getImage();
+
+var img = new Image();
+img.crossOrigin = "anonymous";
+var canvas = document.createElement("canvas");
+var ctx = canvas.getContext("2d");
+var src = "http://s.cn.bing.net/az/hprichbg/rb/NeonMuseum_ZH-CN8131993872_1920x1080.jpg";
+
+img.onload = function() {
+    canvas.width = img.width;
+    canvas.height = img.height;
+    ctx.drawImage(img, 0, 0);
+    canvas.toDataURL("image/png");
+}
+
+img.src = src;
+
+</script>
+</body>
+</html>

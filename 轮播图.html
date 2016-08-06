@@ -1,0 +1,74 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>图片无缝轮播显示</title>
+<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+ 
+<style>
+    .box,.box2{
+        width:800px;
+        height:260px;
+        margin:160px auto;
+        overflow:hidden;
+        position:relative;}
+    .box,.box2 p{
+        text-align:center;}
+    .picBox,.picBox2{
+        margin:0px;
+        padding:0px;
+        list-style:none;
+        width:1500px;}     <!--此处很关键，在实现无疑轮播时这个宽度一定要比显示图片数量+1的宽度宽-->
+    .picBox:hover,.picBox2:hover{
+        cursor:pointer;}
+    .picBox li,.picBox2 li{
+        float:left;}
+    .picBox img,.picBox2 img{
+        width:200px;
+        height:240px;}
+</style>
+</head>
+ 
+<body>
+    <div class="box2">
+        <p>第二种图片轮播：无缝轮播</p>
+        <ul class="picBox2">
+            <li><img src="images/1.jpg"/></li>
+            <li><img src="images/2.jpg"/></li>
+            <li><img src="images/3.jpg"/></li>
+            <li><img src="images/4.jpg"/></li>
+            <li><img src="images/5.jpg"/></li>
+        </ul>
+    </div>
+     
+<script>
+ 
+    $(function(){
+        <!--图片轮播：无缝轮播-->
+        <!--这种无缝轮播可以通过设置animate动画播放速度值和setInterval中的函数调用时间间隔实现间隔无缝轮播-->
+        function rollTwo(){
+            $(".picBox2").animate(
+                {marginLeft:"-200px"},
+                2000,
+                "linear",
+                function(){
+                $(".picBox2").css({marginLeft:"0px"});
+                $(".picBox2 li:first").remove().clone(true).appendTo(".picBox2");  
+                }
+            ) 
+        }
+        var startRollTwo=setInterval(rollTwo,2000);
+        <!--鼠标移入停止移出继续-->
+        $(".picBox2").hover(function(){
+　　　　　　　　　　　　　  $(".picBox2").stop();
+            clearInterval(startRollTwo);   
+        },function(){
+            startRollTwo=setInterval(rollTwo,2000);
+        });
+             
+    });
+ 
+</script>
+  
+</body>
+</html>

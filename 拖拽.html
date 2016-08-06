@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>拖拽</title>
+<style>
+    .da{
+        border: 1px solid #0094ff;
+        width: 100px;
+        height: 100px;
+        cursor: pointer;
+        position: absolute;
+        top:0px;
+        left: 0px;
+    }
+</style>
+</head>
+<body>
+<script>
+    window.onload=function(){
+   function drag(enm){
+        this.x=enm.offsetLeft;
+        this.y=enm.offsetTop;
+       //点击偏移量
+       this.ex=0;
+       this.ey=0;
+        var self=this;
+        enm.onmousedown=function(ed){
+            var edown=ed||event;
+            self.ex=edown.clientX-self.x;
+            self.ey=edown.clientY-self.y;
+            document.onmousemove=function(e){
+                var evnt=e||event;
+                self.x= e.clientX;
+                self.y=e.clientY;
+                self.enmmove(enm);
+                return false;
+            }
+            return false;
+        };
+       document.onmouseup=function(){
+           document.onmousemove=null;
+           return false;
+       };
+    };
+    drag.prototype.enmmove=function(enm){
+        var left=this.x-this.ex;
+        var top =this.y-this.ey;
+        var clientwidth=document.documentElement.clientWidth ||document.body.clientWidth;
+       var clientheight=document.documentElement.clientHeight || document.body.clientHeight;
+       if(left<0)
+       {
+           left=0;
+       }
+       else if(left+enm.offsetWidth>clientwidth){
+            left=clientwidth-enm.offsetWidth;
+        }
+        if(top<0){
+            top=0;
+        }else if(top+enm.offsetHeight>clientheight){
+            top=clientheight-enm.offsetHeight;
+        }
+       document.getElementsByClassName('top')[0].value=top;
+        document.getElementsByClassName('left')[0].value=left;
+       enm.style.left=left+"px";
+       enm.style.top=top+"px";
+    };
+    new drag(document.getElementById('d1'));
+    };
+
+</script>
+top <input type="text" class="left" value="0">
+top<input type="text" class="top"  value="0">
+<div class="da" id="d1"></div>
+</body>
+</html>

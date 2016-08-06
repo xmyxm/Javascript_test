@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+window.onerror = function (errorMessage,scriptURI,lineNumber,columnNumber,error){
+	console.log(arguments);
+	console.log('捕获error');
+}
+
+function creRrror(){
+	try{
+       throw new Error("数据执行错误");
+	}catch (e) {
+		console.log(e);
+		console.log(arguments);//抛错后，arguments获取不到任何结果
+	}finally{
+        console.log("一定会被执行");
+	}
+}
+creRrror();
+
+var x = 1 + a;
+console.log(x);
+
+
+</script>
+</body>
+</html>

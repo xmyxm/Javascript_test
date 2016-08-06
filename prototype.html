@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>prototype</title>
+</head>
+<body>
+<script type="text/javascript">
+//Animal构造函数
+function Animal(name){
+    this.name = name;
+}
+//Animal原型对象
+Animal.prototype = {
+    id:"Animal",
+    sleep:function(){
+        console.log("sleep");
+    }
+}
+ 
+function Human(name,age){
+    Animal.call(this,name);
+    this.age = age;
+}
+ 
+Human.prototype = new Animal();
+Human.prototype.id = "Human";
+ 
+Human.prototype.say = function(){
+    console.log("hello everyone,My name is "+this.name +",I'm "+this.age+" and I'm a "+this.id);
+}
+ 
+//Human相关调用
+var jxl = new Human('笨蛋',25);
+console.log(jxl.name);//笨蛋
+console.log(jxl.id);//Human
+jxl.say();//hello everyone,My name is 笨蛋,I'm 25 and I'm a Human
+ 
+console.log(Animal.prototype.isPrototypeOf(jxl));//true
+console.log(Object.prototype.isPrototypeOf(jxl));//true
+
+console.log("hasOwnProperty检测当前对象是否有给出名称的属性或对象，但无法检测原型链上的属性或者对象：" +jxl.hasOwnProperty('name'));
+console.log(jxl.hasOwnProperty('id'));
+console.log("isPrototypeOf判断其原型链的对象是否存在于指定对象的实例中："+ Human.prototype.isPrototypeOf(jxl))
+console.log(Human.prototype.isPrototypeOf(new Animal()));
+</script>
+
+
+</body>
+</html>

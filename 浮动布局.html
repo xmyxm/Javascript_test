@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>flex弹性布局</title>
+<style type="text/css">
+	.box{
+		display: -webkit-flex;
+		display: flex;/*inline-flex;*/
+	}
+    .box div{
+    	flex:1;
+    }
+</style>
+</head>
+<body>
+<ul>
+	<li class="box">
+		<div><img src=""></div>
+		<div><img src=""></div>
+		<div><img src=""></div>
+		<div><img src=""></div>
+		<div><img src=""></div>
+	</li>
+</ul>
+<script type="text/javascript">
+	function a() {}
+
+	function b() {}
+	b.prototype = new a();
+
+	function c() {}
+	c.prototype = new b();
+
+	function d() {}
+	d.prototype = new c();
+
+	var obj_d = new d();
+
+	if (b.prototype.isPrototypeOf(obj_d)) {
+	  console.log(true);
+	}
+    //判断对象c是否在obj_d对象的原型上
+	if (c.prototype.isPrototypeOf(obj_d)) {
+	  console.log(true);
+	}	
+
+    //判断一个对象是不是另一个对象的实例
+	if(Array instanceof Object){
+		console.log(true);
+	}
+
+	function admin(){this.userName = "name";}
+	admin.prototype.getName = function(){return this.name;}
+	var min = new admin();
+	//判断一个对象是否具有某一个属性
+    console.log(min.hasOwnProperty('userName'));//true
+    console.log(admin.prototype.hasOwnProperty('getName'));//true
+
+	var x = function (){};
+	var y = function (){};
+	x.prototype = new y();
+	var obj_x = new x();
+	if (y.prototype.isPrototypeOf(obj_x)) {
+	  console.log(true);
+	}	
+</script>
+</body>
+</html>

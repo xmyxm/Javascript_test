@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+
+<script type="text/javascript">
+    var img = new Image();
+    img.src = imgSrc;
+    (function (img) {
+        if (img.complete == true) Imgcall(img);
+        else img.onload = function () { Imgcall.call(img) };
+    })(img);
+</script>
+
+</body>
+</html>

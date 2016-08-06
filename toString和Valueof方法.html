@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+	var aa = { 
+		i: 10, 
+		toString: function() { 
+			console.log('toString'); 
+			return this.i; 
+		} 
+	} 
+
+	alert(aa);// 10 toString 
+	alert(+aa); // 10 toString 
+	alert('aa'+aa); // 10 toString 
+	alert(String(aa)); // 10 toString 
+	alert(Number(aa)); // 10 toString 
+	alert("a:"+ aa == '10'); // true toString 
+
+//再看valueOf。 
+	var bb = { 
+		i: 10, 
+		valueOf: function() { 
+			console.log('valueOf'); 
+			return this.i; 
+		} 
+	} 
+	alert(bb);// [object Object] 
+	alert(+bb); // 10 valueOf 
+	alert('bb'+bb); // 10 valueOf 
+	alert(String(bb)); // [object Object] 
+	alert(Number(bb)); // 10 valueOf 
+	alert("bb:"+ bb == '10'); // true valueOf 
+
+
+//发现有点不同吧？！它没有像上面toString那样统一规整。对于那个[object Object]
+//，我估计是从Object那里继承过来的，我们再去掉它看看。 
+	Object.prototype.toString = null; 
+	var cc = { 
+		i: 10, 
+		valueOf: function() { 
+		console.log('valueOf'); 
+			return this.i; 
+		} 
+	} 
+	alert(cc);// 10 valueOf 
+	alert(+cc); // 10 valueOf 
+	alert('cc'+cc); // 10 valueOf 
+	alert(String(cc)); // 10 valueOf 
+	alert(Number(cc)); // 10 valueOf 
+	alert("cc:"+ cc == '10'); // true valueOf 
+
+	</script>
+
+</body>
+</html>

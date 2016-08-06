@@ -1,0 +1,119 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<style>
+    #test{
+       background-color: #A9A9A9;
+    }
+</style>
+<body>
+
+<div class="dm"></div>
+<p class="ax">豆腐干豆腐</p>
+<p class="x">丹甫股份</p>
+<p class="x">东方刚刚发给</p>
+<p class="x">复古风格</p>
+<div id="d1">
+    <p class="p1">阿斯顿撒 <a>到山顶</a> 大幅度发</p>
+</div>
+<div>
+    <a id="dsj">事件简介</a>
+    <a>个哈哈哈</a>
+    <a>过后恢复</a>
+</div>
+<div id="test">
+    <p>测试</p>
+    <p>萨顶顶 </p>
+    <p class="ax">四分法</p>
+    <p class="ax">法规或更换</p>
+    <p class="ax">电饭锅电饭锅</p>
+    <p id="ss">速度多少到山顶</p>
+</div>
+<div id="div713">
+    <p>
+        顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶
+    </p>
+</div>
+<div id="div714">
+<p class="p12">
+  <span class="one">jquery事件</span>
+    <span id="p13">的第三方的</span>
+</p>
+</div>
+<!--<script src="jquery-1.8.2.js"></script>-->
+
+<script src="Mquery.js"></script>
+<script>
+
+/*console.log(Mquery('#d1 .p1 a'));
+console.log(Mquery('.p1'));
+console.log(Mquery('a'));*/
+
+//console.log($().numbersort([1,85,65,225,33,15,64,24,78,64,9,45,54,21,44,56,46,4,64,87]));
+/*
+var a=[1,2],b=[3,4],c=[5,6];
+console.log(a.concat(b,c));
+*/
+//delegate("#div",'li',)
+//console.log($().numbersort([1,85,65,225,85,33]));
+/*console.log($('a'));
+console.log($('a').text());
+console.log($('a').remove());*/
+
+window.onload=function(){
+    document.getElementById("dsj").onclick=function(e){
+        alert('cf')
+    }
+
+   var x= document.getElementById("div713").getElementsByTagName('p');
+    for(var i=0;i< x.length;i++){
+        x[i].onmouseup=function(e){
+            var e=event || e;
+            if(document.selection){
+                console.log(document.selection.createRange().text);
+            }else{
+                console.log(window.getSelection().toString());
+            }
+        };
+    }
+    /*
+    var a=document.getElementById("div713").getElementsByTagName('p');
+    a.onclick=function(e){
+        var e=event || e;
+        if(document.selection){
+            console.log(document.selection.createRange().text);
+        }else{
+            console.log(window.getSelection().toString());
+        }
+    }*/
+}
+$('#test').delegate('#ss','click',null,function(){alert(123);})
+//$().ajax();
+
+  //  $('body').delegate('#div714 p .one','click',null,function(){alert(123)});
+/*
+    var xc=document.getElementsByTagName('p');
+    alert(typeof xc);
+    var xv=[1,2,3];
+alert(typeof xv);*/
+
+ //console.log($('body').find('#div714'));
+
+  /* var ac=document.getElementsByTagName('body');
+    for(var i=0;i< ac.length;i++){
+        console.log(ac[i].getElementById('div714'));
+    }*/
+  console.log($().StrLength('按时dfdf大'));
+var qw={
+    a:1,
+cx:{c1:1,c2:2},
+    vx:function(){},
+    bx:'深度',
+    max:{e:{s1:function(){console.log('123')}},r:{s2:'db'},t:{s3:789}}
+};
+var x= $().depthcopy(qw);
+</script>
+</body>
+</html>

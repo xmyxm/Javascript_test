@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>innerHTML,innerText和outerHTML,outerText的区别</title>
+    <style>
+        body{
+            font-family: Helvetica,"Microsoft YaHei",arial;
+            color: #333;
+        }
+        .main{
+            width: 980px;
+            margin: 0px auto;
+        }
+    </style>
+</head>
+<body>
+<div class="main">
+<p id="content">开始测试</p>
+<input type="button" value="点击执行innerHTML" onclick="innerhtml()">
+<input type="button" value="点击执行innerText" onclick="innertext()">
+</div>
+<script type="text/javascript">
+    var peleObj = document.getElementById('content');
+    function innerhtml(){
+        peleObj.innerHTML = "<span style='color:red'>new content</span>";
+        console.log(peleObj.innerHTML);
+    }
+
+    //innerText不是W3C标准，谨慎使用
+    function innertext(){
+        peleObj.innerText = "<span style='color:#0094ff'>new content</span>";
+        console.log(peleObj.innerText);
+    }
+
+</script>
+</body>
+</html>

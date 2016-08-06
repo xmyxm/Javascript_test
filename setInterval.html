@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>setInterval</title>
+<style type="text/css">
+
+</style>
+</head>
+<body>
+
+<div>
+<script type="text/javascript">
+	function showalert(){
+	   alert(1);
+	}
+
+	function showlog(){
+		console.log(new Date().getTime());
+	}
+    //间隔5秒执行一次，必须等待五秒后才会执行第一次
+	var Ttimer = setInterval(showalert,5*1000);
+	clearInterval(Ttimer);
+    //3秒后执行，只执行一次
+    var outTtimer = setTimeout(showlog,3*1000);
+    clearTimeout(outTtimer);
+
+</script>
+</div>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+	var fn = function (){
+		var that = this;
+		function a(){
+		console.log(this === window);
+		} 
+		a();
+	}
+	fn();
+	</script>
+
+</body>
+</html>

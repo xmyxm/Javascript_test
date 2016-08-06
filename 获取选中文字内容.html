@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<div id="content">
+    <p>段落文字，按住鼠标不动选中文字，释放鼠标得到文字内容及其长度</p>
+    <p>如果你只看到了蓝色图标，那么还停留在表相。如果你还看到了类似“大众点评”与“微信”，那么进入了皮相。如果你看清楚了产品改版背后的商业逻辑与战略布局，那才算是心相。从用户体验的五个层次看支付宝的改版：战略层→范围层→结构层→框架层→表现层。</p>
+</div>
+<script>
+    window.onload=function(){
+        var x= document.getElementById("content").getElementsByTagName('p');
+        for(var i=0;i< x.length;i++){
+            x[i].onmouseup=function(e){
+                var e=event || e;
+                var str;
+                if(document.selection){
+                    str=document.selection.createRange().text;
+
+                }else{
+                    str=window.getSelection().toString();
+                }
+                console.log('文字：'+str,'长度：'+str.length);
+            };
+        }
+    }
+</script>
+</body>
+</html>

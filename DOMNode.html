@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>DOM节点</title>
+</head>
+<body>
+目录一：
+<ul>
+	<li>第一个节点</li>
+	<li id="sli">第二个节点</li>
+	<li>第三个节点</li>
+</ul>
+目录二：
+<ul>
+	<li id="fchild">第一个节点</li>
+	<li>第二个节点</li>
+	<li>第三个节点</li>
+</ul>
+
+<script type="text/javascript">
+var node = document.getElementsByTagName('ul')[0]; 
+console.log("获取文本节点" + node.firstChild);
+console.log("获取元素节点" + node.firstElementChild);
+
+var ele = document.getElementById('sli');
+console.log("元素父节点" + ele.parentNode + ele.parentElement);
+console.log("元素上一个节点，文本节点" + ele.previousSibling);
+console.log("元素上一个节点，元素节点" + ele.previousElementSibling);
+console.log("元素下一个节点，文本节点" + ele.nextSibling);
+console.log("元素下一个节点，元素节点" + ele.nextElementSibling);
+
+var newimg = document.createElement('img');
+newimg.src = "https://ss0.bdstatic.com/k4oZeXSm1A5BphGlnYG/icon/weather/aladdin/png_18/a8.png";
+var newli = document.createElement('li');
+newli.style.color = '#0094ff';
+newli.className = "myClass";
+newli.textContent = "我是新节点";
+newli.setAttribute('data-title','天气图标');
+newli.appendChild(newimg);
+node.replaceChild(newli,ele);
+
+console.log("生成元素节点:" + document.createElement("a"));
+console.log("生成属性节点:" + document.createAttribute("data-content"));
+console.log("生成文本节点:" + document.createElement("我是简单文本"));
+
+var lichild1 = document.createElement("li");
+lichild1.textContent = "我是插入的insertBefore节点";
+document.getElementsByTagName('ul')[1].insertBefore(lichild1,document.getElementById("fchild"));
+
+var lichild2 = document.createElement("li");
+lichild2.textContent = "我是插入的insertAfter节点";
+document.getElementsByTagName('ul')[1].appendChild(lichild2);
+
+</script>
+
+
+</body>
+</html>

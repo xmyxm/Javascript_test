@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>History</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no,minimal-ui" />
+<style type="text/css">
+
+</style>
+<script type="text/javascript" src="lib/zepto.min.js"></script>
+</head>
+<body>
+<div>
+	<input type="button" value="点击跳转" id="gotolink">
+</div>
+<div>
+<p>浏览器的前进与后退，会触发window.onpopstate事件,页面前进和后退不会请求url地址</p>
+<p>history.pushState 添加一条当前的浏览器历史，更改当前的浏览器地址，不请求这个新地址,这个会导致请求头的referer发生改变</p>
+<p>history.replaceState  更改当前的浏览器历史，更改当前的浏览器地址，不请求这个新地址</p>
+<p>location.hash 可以直接获取当前url的hash值和修改当前的hash值,赋值可以用不加“#”,若赋新值和以前hash值一致则不会触发hashchange事件</p>
+<P>history.pushState和history.replaceState不会触发hashchange事件</P>
+<p>若修改location.href <p>
+</div>
+<script type="text/javascript">
+$("#gotolink").bind("click",function (){
+history.pushState({name:"page-b"},"页面-b","https://www.baidu.com/b.html");
+history.replaceState({name:"page-a"},"页面-a","https://www.baidu.com/a.html");
+
+});
+
+window.onpopstate = function(){console.log(history.state)};
+window.onhashchange = function(){console.log('hash is change')};
+location.hash = "newhash";
+location.hash = "#newhash";
+
+
+</script>
+</body>
+</html>

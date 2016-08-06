@@ -1,0 +1,168 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>手写正则表达式</title>
+    <style>
+        body{
+            font-family: "Microsoft YaHei",arial,Helvetica;
+            color: #333;
+        }
+        .main{
+            width: 980px;
+            margin: 0px auto;
+        }
+    </style>
+</head>
+<body>
+<script type="text/javascript" src="lib/zepto.min.js"></script>
+<div class="main">
+    <p>
+        手机号：<input type="text" name="phone" id="phone"><input type="button" value="验证手机" id="vphone">
+    </p>
+    <h4>字符类 ---〉简单类，反向类，范围类，组合类，预定义类</h4>
+    <p id="pid">
+        字符    描述 <br />
+        \n      换行符<br />
+        \r      回车符<br />
+        \t      制表符<br />
+        \f      换页符（Tab）<br />
+        \cX     与X对应的控制字符<br />
+        \b      退格符(BackSpace)<br />
+        \v      垂直制表符<br />
+        \0      空字符("")<br />
+        \s space， 空格<br />
+        + 一个或多个<br />
+        ^ 开始，^\s，以空格开始<br />
+        $ 结束，\s$，以空格结束<br />
+        | 或者<br />
+        /g global， 全局<br />
+        /i 是否区分大小写
+    </p>
+    <h4>下面是正则表达式中的预定义类</h4>
+    <p>
+        代码  等同于                   匹配 <br />
+        .    IE下[^/n]，其它[^/n/r]   匹配除换行符之外的任何一个字符 <br />
+        /d    [0-9]                   匹配数字 <br />
+        /D    [^0-9]                  匹配非数字字符 <br />
+        /s    [ /n/r/t/f/x0B]         匹配一个空白字符 <br />
+        /S    [^ /n/r/t/f/x0B]        匹配一个非空白字符 <br />
+        /w    [a-zA-Z0-9_]            匹配字母数字和下划线 <br />
+        /W    [^a-zA-Z0-9_]           匹配除字母数字下划线之外的字符 <br />
+    </p>
+    <h4>量词(下表量词单个出现时皆是贪婪量词)</h4>
+    <p>
+        代码  描述<br />
+        *     匹配前面的子表达式零次或多次。例如，zo* 能匹配 "z" 以及 "zoo"。 * 等价于{0,}。<br />
+        +     匹配前面的子表达式一次或多次。例如，'zo+' 能匹配 "zo" 以及 "zoo"，但不能匹配 "z"。+ 等价于 {1,}。<br />
+        ?     匹配前面的子表达式零次或一次。例如，"do(es)?" 可以匹配 "do" 或 "does" 中的"do" 。? 等价于 {0,1}。<br />
+        {n}   n 是一个非负整数。匹配确定的 n 次。例如，'o{2}' 不能匹配 "Bob" 中的 'o'，但是能匹配 "food" 中的两个 o。<br />
+        {n,}  n 是一个非负整数。至少匹配n 次。例如，'o{2,}' 不能匹配 "Bob" 中的 'o'，但能匹配 "foooood" 中的所有 o。'o{1,}' 等价于 'o+'。'o{0,}' 则等价于 'o*'。<br />
+        {n,m} m 和 n 均为非负整数，其中n <= m。最少匹配 n 次且最多匹配 m 次。刘， "o{1,3}" 将匹配 "fooooood" 中的前三个 o。'o{0,1}' 等价于 'o?'。请注意在逗号和两个数之间不能有空格。
+    </p>
+    <h4>贪婪量词与惰性量词</h4>
+    <p>
+        •用贪婪量词进行匹配时，它首先会将整会字符串当成一个匹配，如果匹配的话就退出，如果不匹配，就截去最后一个字符进行匹配，如果不匹配，继续将最后一个字符截去进行匹配，直到有匹配为止。直到现在我们遇到的量词都是贪婪量词<br />
+        •用惰性量词进行匹配时，它首先将第一个字符当成一个匹配，如果成功则退出，如果失败，则测试前两个字符，依些增加，直到遇到合适的匹配为止<br />
+        惰性量词仅仅在贪婪量词后面加个"?"而已,如"a+"是贪婪匹配的,"a+?"则是惰性的
+    </p>
+    <h4>正则表达式对象的方法</h4>
+    <p>
+        test,返回一个 Boolean 值，它指出在被查找的字符串中是否存在模式。如果存在则返回 true，否则就返回 false。<br />
+        source,返回正则表达式模式的文本的复本。只读。<br />
+        lastIndex,返回字符位置，它是被查找字符串中下一次成功匹配的开始位置。<br />
+        $1...$9,返回九个在模式匹配期间找到的、最近保存的部分。只读。<br />
+        input ($_),返回执行规范表述查找的字符串。只读。<br />
+        lastMatch ($&),返回任何正则表达式搜索过程中的最后匹配的字符。只读。<br />
+        lastParen ($+),如果有的话，返回任何正则表达式查找过程中最后括的子匹配。只读。<br />
+        leftContext ($`),返回被查找的字符串中从字符串开始位置到最后匹配之前的位置之间的字符。只读。<br />
+        rightContext ($'),返回被搜索的字符串中从最后一个匹配位置开始到字符串结尾之间的字符。只读。
+    </p>
+    <h4>String对象一些和正则表达式相关的方法</h4>
+    <p>
+        match,找到一个或多个正则表达式的匹配。<br />
+        replace,替换与正则表达式匹配的子串。<br />
+        search,检索与正则表达式相匹配的值。<br />
+        split,把字符串分割为字符串数组。
+    </p>
+    <h4>正则表达式(括号)、[中括号]、{大括号}的区别</h4>
+    <p>
+        () 是为了提取匹配的字符串。表达式中有几个()就有几个相应的匹配字符串。<br />
+        (\s*)表示连续空格的字符串。<br />
+        []是定义匹配的字符范围。比如 [a-zA-Z0-9] 表示相应位置的字符要匹配英文字符和数字。[\s*]表示空格或者*号。<br />
+        {}一般用来表示匹配的长度，比如 \s{3} 表示匹配三个空格，\s[1,3]表示匹配一到三个空格。<br />
+        (0-9) 匹配 '0-9′ 本身。 [0-9]* 匹配数字（注意后面有 *，可以为空）[0-9]+ 匹配数字（注意后面有 +，不可以为空）{1-9} 写法错误。<br />
+        [0-9]{0,9} 表示长度为 0 到 9 的数字字符串。
+    </p>
+</div>
+
+<script type="text/javascript">
+    //手机号验证
+    $().ready(function(){
+      $("body").on("click",'#vphone',function(){
+          var z=/^1(3|5|7|8)[0-9]{9}$/;
+          if(z.test($("#phone").val())){
+              alert('成功：'+$("#phone").val());
+          }
+      })
+    })
+
+    /*
+    * 匹配邮件
+    * */
+    var xx= '4512254@qq.com';
+    var aa=  /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+\.([a-zA-Z0-9_-])+$/;
+    var a = /^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/;
+    var email = "/^/";
+
+    //字符替换
+    var _str = " a sds234水AfSdfgDD电345fghvbMgfHG费d fdf ";
+    //字符替换
+   console.log(_str.replace(/sd|fd/g,'new string'));
+    //空格替换
+   console.log(_str.replace(/\s/g,''));
+   //前后空格替换
+    console.log(_str.replace(/^\s|$\s/g,''));
+   //所有数字替换为*
+    console.log(_str.replace(/[0-9]/g,'*'));
+   //所有字符替换为数字0
+    console.log(_str.replace(/[a-zA-Z]/g,'0'));
+
+    //取身份证年月日
+    var _sfz ='522635198708184662';
+    var _birthday = _sfz.substr(6,8);
+    console.log(_birthday.replace(/(.{4})(.{2})(.{2})/,'$1年$2月$3日'));
+
+    //字符串倒序
+    var _sxStr = '1a2b3c4d5e6f7g8h9i';
+    console.log(_sxStr.split('').reverse().join(''));
+
+    // exec 返回查询值
+    var _data = "123123,Cat,cat,xzcsd,";
+    var _reCat = /cat/gi;
+    console.log(_reCat.exec(_data)); //Cat
+
+    //match 得到查询数组
+    console.log(_data.match(/cat/gi));
+    //search  返回搜索位置  类似于indexof
+    console.log(_data.search(/cat/gi));
+    //查找符合要求的字符
+    console.log('sc1qwe,qesc2,sc3,qwesc4dfjjdsc5cv,sc6,sc7'.match(/sc[1-5]/gi));
+
+    //回车符替换
+    var _zf = document.getElementById('pid').innerHTML;
+    console.log("去掉空格，换行和回车符:"+_zf.replace(/[\r\n\t|<br>|\s]*/gi,''));
+
+    //取纯净有效数组
+    var _arrStr = ",apple  ,,orange, banana,,,grape,wate rmelon,";
+    console.log(_arrStr.replace(/(^,)|(,$)|(\s)/g,'').replace(/,{2,}/g,',').split(','));
+
+    //匹配数字字母下划线
+    var _snStr = "4564--a6_s-ad6@5s_d34@!#53sdf&^*sdf水电费2sdf]*-+/,./.,";
+    console.log(_snStr.replace(/\W/g,''));
+
+    //匹配首尾空格数量大于0小于3
+    var _kgStr = "   cnm423423423!@>?>>::>::#%^&*(()^$$YNJFmvc fdg mnbv ";
+    console.log(/^\s{1,3}.+\s{1,3}$/.test(_kgStr));
+ </script>
+</body>
+</html>

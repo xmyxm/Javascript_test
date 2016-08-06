@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<script>
+    bankiconstyle = [], //生成当前查询的银行图标样式
+    banksiconstyle = $('<style type="text/css" id="banksiconstyle"></style>');
+    $("head").append(banksiconstyle); // 添加银行图标样式
+    /**
+     * 过滤出卡片类型从字典中获取classname
+     * @function
+     * @name getBankClass
+     * @description 过滤出卡片类型从字典中获取classname
+     * @param {JSON} card - 银行卡数据
+     * @author lh_sun@ctrip.com
+     * @memberof common/bankmap
+     * @inner
+     */
+    ret.getBankClass = function (card) {
+        var cardName = card.card_name || "", bankicon = bankicons[cardName], bankiconcss = "";
+        if (!bankiconstyle[cardName]) {
+            bankiconstyle[cardName] = "bankicon_" + bankicon;
+            if (!!bankicon) {
+                bankiconcss = ".bankicon_" + bankicon + "{ background:url(https://secure.ctrip.com/webapp/payment2/dest/res/res/img/bank/bank_" + bankicon + ".png) no-repeat;}";
+            } else {
+                bankiconcss = ".bankicon_default{ background:url(https://secure.ctrip.com/webapp/payment2/dest/res/res/img/bank/bank_default.png) no-repeat;}";
+                bankiconstyle[cardName] = "bankicon_default";
+            }
+            banksiconstyle.append(bankiconcss);
+        }
+        return bankiconstyle[cardName];
+    }
+
+</script>
+</body>
+</html>

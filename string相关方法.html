@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>string的相关方法</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no,minimal-ui" />
+    <style type="text/css">
+      
+    </style>
+</head>
+    <body>
+<script type="text/javascript">
+String.prototype.isPhone = function (){
+	return /1(3|5|7|8)[0-9]{9}$/.test(this);
+}	
+
+var strPhone = "13367235490";
+console.log(strPhone.isPhone());
+
+var strText = "圣诞节圣诞节";
+console.log(strPhone.charAt(4));//获取指定位置的字符串
+console.log(strText.charAt(2));
+console.log(strText.charCodeAt(2));//返回指定位置的字符的Unicode编码
+console.log(String.fromCharCode(100,101));//可接受一个或多个Unicode值，然后返回一个字符串。另外该方法是String 的静态方法
+console.log(strText.indexOf("诞",2));//参数：要查找的子字符串；查找的开始位置（不传默认0）
+
+console.log(strText.lastIndexOf("圣",2));//参数：要查找的字符串；要查找的开始位置(不传默认字符的长度，传负数默认为0)；当前查找方式为从后往前，并返回位置的索引，
+
+console.log(strText.search("节"));//查找字符串首次出现位置的索引
+console.log(strText.search(/诞/));//查找字符串中匹配正则的首次出现位置的索引
+
+console.log(strText.match("节"));//查找字符串,未找到则返回null，找到则返回当前字符的数组
+console.log(strText.match(/诞/g));//查找字符串,未找到则返回null，找到则返回符合条件的数组
+
+console.log(strText.substring(1,3));//截取指定【长度】范围内的字符串，第二个参数可省略，若省略则指定的开始位置截取到字符串末尾，如果参数为负数则视为0
+console.log(strText.slice(1,3));//截取指定长度内的索引，和substring类似，唯一不同点在于参数可为负数，若负数标准从尾部开始截取
+
+var str = 'abcdefg';
+console.log(str.substr(1, 3));   //返回bcd
+console.log(str.substr(2));  //返回cdefg
+console.log(str.substr(-2, 4));  //返回fg，目标长度较大的话，以实际截取的长度为准
+
+strText.replace("节","节日");//只会替换一个
+strText.replace(/节/g,"节日");//会替换所有符合条件的
+
+var str = 'a|b|c|d|e';
+console.log(str.split('|'));    //返回["a", "b", "c", "d", "e"]
+console.log(str.split('|', 3)); //返回["a", "b", "c"]
+console.log(str.split('')); //返回["a", "|", "b", "|", "c", "|", "d", "|", "e"]
+var str = 'a1b2c3d4e';
+console.log(str.split(/\d/)); //返回["a", "b", "c", "d", "e"]
+
+console.log(str.toLowerCase());//转小写
+console.log(str.toUpperCase());//转大写
+
+</script>
+    </body>
+</html>
