@@ -1,0 +1,177 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>常规题型</title>
+</head>
+<body>
+<div>
+	<p>use strict</p>
+	<p>去除with语句,严格模式使用with会报错!</p>
+    <p>防止意外的全局变量 (例："use strict"; var xx = uu = 1; 在这里uu就会报错,因为没有使用var申明uu) </p>
+    <p>取消this值的强制转换. (例：function Person(name){this.name = name;};Person(); 这里直接调用会报错，必须强制指定this的值或者var x = new Person("小明"); 建议使用 Person.call(this,"小明") 或者.apply 或者 Person.bind(this)(); 来绑定this。</p>
+	<p>拒绝重复 (例：function news(title,content,title){} 这里就会语法错误，因为参数名重复。或者 var obj = {name:"张三",name:"李四"} 这里也会语法错误，因为两个属性名严格模式下不可以一致)</p>
+	<p>更安全的eval()  (例：!function() {eval("var x = 10;");alert(x);}() 这里会报错，因为严格模式下在eval()语句中声明的变量以及函数不会在包含域中创建 )</p>
+	<p>不可改变引发的错误  (例：var person = {};Object.defineProperty(person, "name" {writable: false,value: "Nicholas"}); person.name = "John"; 严格模式修改不被允许的属性会报错!)    ECMAScript 5 同时引入了修改属性特征的能力，例如设置一个属性为只读或者冻结整个对象的结构，在非严格模式下，试图修改一个不可变的属性时将悄无声息地失败。严格模式将保证无论你在何时试图使用一种不被允许的方式修改一个对象或对象的属性时抛出错误</p>
+	<p>优点：其一：如果在语法检测时发现语法问题，则整个代码块失效，并导致一个语法异常。
+其二：如果在运行期出现了违反严格模式的代码，则抛出执行异常。
+缺点：js文件在进行压缩合并的时候可能出现重复的"use strict"; 声明，也可能出现不支持严格模式的代码被合并了出现问题</p>
+</div>
+
+<div>
+	<p>@imort link</p>
+	<p>资源文件引入 sass引入其它模块文件</p>
+
+</div>
+
+<div>
+	<p>appy call</p>
+	<p>两个方法产生的作用是完全一样的,方法传递的参数不同</p>
+	<p>当参数明确时可用call, 当参数不明确时可用apply给合arguments</p>
+</div>
+
+<div>
+    <p>移动端兼容怎么处理</p>
+	<p>根据app在各品牌手机占比排名前15的机型进行兼容性测试</p>	
+	<p></p>
+	<p></p>
+	<p></p>
+</div>
+
+<div>
+    <p>position 定位</p>
+	<p>absolute：生成绝对定位的元素，相对于 static 定位以外的第一个父元素进行定位。元素的位置通过 "left", "top", "right" 以及 "bottom" 属性进行规定。</p>	
+	<p>fixed：生成绝对定位的元素，相对于浏览器窗口进行定位。元素的位置通过 "left", "top", "right" 以及 "bottom" 属性进行规定。</p>
+	<p>relative：生成相对定位的元素，相对于其正常位置进行定位。因此，"left:20" 会向元素的 LEFT 位置添加 20 像素。</p>
+	<p>static：默认值。没有定位，元素出现在正常的流中（忽略 top, bottom, left, right 或者 z-index 声明）。</p>
+	<p>inherit：规定应该从父元素继承 position 属性的值。</p>
+</div>
+
+<div>
+	<p>移动端300ms延迟与tap穿透问题</p>
+	<p>click与tap都是触发点击事件，但是在手机web端，click会有200-300ms的延迟，所以一般用tap代替click作为点击事件。</p>
+	<p>200-300ms延迟 主要原因是 设备300ms内判断是否双击两次的缩放动作</p>
+	<p>使用zepto框架的tap的点击事件，来规避click事件的延迟响应，会出现穿透，即点击会浮层关闭后，浮层后面的元素会在200-300ms延迟出现点击事件</p>
+</div>
+
+<div>
+	<p>eval()函数</p>
+	<p>计算字符串参数，并执行其中的的 JavaScript 代码</p>
+	<p>通过计算 string 得到的值（如果有的话）。</p>
+	<p>var val = eval('var a =1,b=2;a+b'); 可以接收到返回值</p>
+</div>
+
+<div>
+	<p>parseInt 传值 </p>
+	<p>函数可解析一个字符串，并返回一个整数</p>
+    <p>parseInt(string, radix)</p>
+	<p>string	必需。要被解析的字符串。</p>
+    <p>radix    可选。表示要解析的数字的基数。该值介于 2 ~ 36 之间。当参数 radix 的值为 0，或没有设置该参数时，parseInt() 会根据 string 来判断数字的基数。举例，如果 string 以 "0x" 开头，parseInt() 会把 string 的其余部分解析为十六进制的整数。如果 string 以 0 开头，那么 ECMAScript v3 允许 parseInt() 的一个实现把其后的字符解析为八进制或十六进制的数字。如果 string 以 1 ~ 9 的数字开头，parseInt() 将把它解析为十进制的整数。</p>
+</div>
+
+<div>
+	<p>H5储存</p>
+	<p>localStorage和sessionStorage</p>
+    <p>ocalStorage.setItem(“key”，“value”)//存储</p>
+	<p>localStorage.getItem(key)//按key进行取值</p>
+	<p>localStorage.valueOf()//获取全部值</p>
+	<p>localStorage.removeItem(key)//删除单个值</p>
+	<p>localStorage.clear()//删除全部数据</p>
+	<p>localStorage.length//获得数据的数量</p>
+	<p>localStorage.key(N)//获得第N个数据的key值</p>
+	<p>cookie读写</p>
+    <p>window.document.cookie</p>
+	<p>manifest 做离线缓存</p>
+	<p>WebSQL 使用</p>
+	<p>通过SQL语句形式来建表写字段，增删改查数据，类似关系型数据库！</p>
+	<p>IndexedDB 使用</p>
+	<p>IndexedDB里数据以对象的形式存储，每个对象都有一个key值索引。IndexedDB里的操作都是事务性的。一种对象存储在一个objectStore里，objectStore就相当于关系数据库里的表。IndexedDB可以有很多objectStore，objectStore里可以有很多对象。每个对象可以用key值获取。</p>
+	<p>IndexedDB很适合存储大量数据，它的API是异步调用的。IndexedDB使用索引存储数据，各种数据库操作放在事务中执行。IndexedDB甚至还支持简单的数据类型。IndexedDB比localstorage强大得多，但它的API也相对复杂。对于简单的数据，你应该继续使用localstorage，但当你希望存储大量数据时，IndexedDB会明显的更适合，IndexedDB能提供你更为复杂的查询数据的方式。</p>
+</div>
+
+<div>
+	<p>一个请求到响应的过程</p>
+	<p></p>
+    <p></p>
+	<p></p>
+    <p></p>
+	<p>http://www.68idc.cn/help/makewebs/qitaasks/20160530618191.html</p>
+</div>
+
+<div>
+	<p></p>
+	<p></p>
+    <p></p>
+	<p></p>
+    <p></p>
+	<p></p>
+</div>
+
+<div>
+	<p></p>
+	<p></p>
+    <p></p>
+	<p></p>
+    <p></p>
+	<p></p>
+</div>
+
+<div>
+	<p></p>
+	<p></p>
+    <p></p>
+	<p></p>
+    <p></p>
+	<p></p>
+</div>
+
+
+
+
+
+
+
+<script type="text/javascript">
+//1.原型 原型链 
+
+//2.use strict   @imort link
+
+//3.appy call
+
+//4. 有没仿echarts
+
+//5. 移动端兼容怎么处理
+
+//6. eval作用
+
+//7.parseInt 传值 
+
+//8. H5储存
+
+//9.一个请求到响应的过程
+
+//10. 性能优化
+
+//11. js异步加载
+
+//12.js 兼容  css兼容 
+
+//13. 判断一个对象
+
+//14.单页面路由实现原理
+
+//15 单页面seo
+
+//16. 居中
+
+//17. 跨域
+
+//18. angular 与 react 优缺点
+
+//19. 异步上传
+
+//20,  字符串转成json对象的方式
+
+</script>
+
+</body>
+</html>
