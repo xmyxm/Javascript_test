@@ -1,0 +1,45 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="apple-itunes-app" content="app-id=ctrip, affiliate-data=myAffiliateData, app-argument=myURL" />
+    <title>toDataUrl</title>
+    <style type="text/css">
+    </style>
+    <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+</head>
+<body>
+
+<input type="file" name="imgfile" id="addImg">
+
+<script type="text/javascript">
+
+$("#addImg").bind("change",function(e){
+  var _this = e.currentTarget;
+  var src = _this.files,
+  reader = new FileReader();
+  reader.readAsDataURL(src[0]);
+  reader.onload = function(e){
+      drawing(this.result, function(msg){alert(msg);})
+  }
+  var drawing = function(data,callback){
+  var img = new Image;
+  img.onload = function(){
+    var _this = this,
+    canvas = document.createElement("canvas");
+    canvas.width = _this.width,canvas.height = _this.height;
+    var g = canvas.getContext("2d");
+    g.drawImage(_this,0,0,_this.width,_this.height);
+    var base64 = canvas.toDataURL();
+    callback && callback("succeed");
+  };
+   img.src = data;
+}
+});
+
+</script>
+
+</body>
+</html>

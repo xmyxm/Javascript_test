@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>变量提升</title>
+</head>
+<body>
+
+<script type="text/javascript">
+//函数作用域中  变量声明会在函数中提前
+!function(){var a,b,c,d;}()
+
+//全局作用域中访问不到函数声明的局部变量
+console.log(window.a);//undefined
+console.log(window.b);//undefined
+console.log(window.d);//undefined
+
+//局部变量声明和赋值，效果同上
+!function(){var qq=1,xx=2;}()
+console.log(window.qq);//undefined
+console.log(window.xx);//undefined
+
+//局部变量ww声明
+//重点：yy会被声明为全局变量
+!function(){var ww=yy=999;}()
+console.log(window.ww);//undefined
+console.log(window.yy);//999
+
+
+//函数声明和函数表达式都会涉及变量提升
+var getName = function () { alert (1);};
+function getName() { alert (2);}
+getName();
+
+//执行的最终结果
+//浏览器对js进行解析,都会先将函数声明或变量声明做一个预处理
+//函数声明是全部函数体提前；函数表达式是只对变量本身提前，函数体会在执行的时候再赋值
+
+//预处理结果如下：
+var getName;
+function getName() { alert (2);}
+
+getName = function () { alert (1);}
+getName();//结果为1
+
+// function(){}(1) 这种写法会报错，原因如下： 
+//函数声明是必须有函数名称的，如果没有函数名称则是函数表达式。而表达式语句是不能以function作为开头的，所以会报语法错误。
+
+
+
+(function () { console.log("使用括号包裹定义函数体，解析器将会以函数表达式的方式去调用定义函数----自执行函数");})()
+//使用括号包裹定义函数体，解析器将会以函数表达式的方式去调用定义函数。也就是说，任何能将函数变成一个函数表达式的作法，都可以使解析器正确的调用定
+//义函数。而 ! 就是其中一个，而 + - || 都有这样的功能。
+//另外，用 ! 可能更多的是一个习惯问题，不同的运算符，性能是不同的
+!function () { console.log("使用!解析器将会以函数表达式的方式去调用定义函数----自执行函数");}()
+
+</script>
+
+</body>
+</html>
