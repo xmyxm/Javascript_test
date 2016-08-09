@@ -90,14 +90,32 @@
 
 <div>
 	<p>一个请求到响应的过程</p>
-	<p></p>
-    <p></p>
-	<p></p>
-    <p></p>
+	<p>浏览器查找IP地址，根据dns缓存查找</p>
+    <p>浏览器发送http请求</p>
+	<p>服务端接收并处理报文</p>
+	<p>服务端发送响应报文</p>
+    <p>浏览器接收报文</p>
+    <p>解析html构建dom树</p>
+    <p>构建render树</p>
+	<p>布局render树</p>
+    <p>绘制render树</p>
 	<p>http://www.68idc.cn/help/makewebs/qitaasks/20160530618191.html</p>
 </div>
 
 <div>
+	<p>性能优化</p>
+	<p>图片 ，css ，js 资源压缩合并</p>
+    <p>cdn 加速</p>
+	<p>服务器端采用gzip压缩</p>
+    <p>css置于页面前面，js置于页面后面，提高渲染性能</p>
+	<p>避免使用css表达式</p>
+	<p>将js和css文件作为外部文件使用，提高复用性</p>
+	<p>避免重定向(301永久重定向，302临时重定向)</p>
+	<p>使用ajax缓存</p>
+	<p>减少Cookie</p>
+	<p>使用CSS3，svg ，IconFont 代替图片</p>
+    <p>减少Dom操作，缓存DOM选择与计算，尽量使用ID选择器，尽量使用事件代理，避免使用批量绑定事件</p>
+	<p>适量使用css3动画和canvas动画</p>
 	<p></p>
 	<p></p>
     <p></p>
@@ -107,8 +125,12 @@
 </div>
 
 <div>
-	<p></p>
-	<p></p>
+	<p>display 属性</p>
+	<p>none	此元素不会被显示。</p>
+	<p>block	此元素将显示为块级元素，此元素前后会带有换行符。</p>
+	<p>inline	默认。此元素会被显示为内联元素，元素前后没有换行符。</p>
+	<p>inline-block	行内块元素。（CSS2.1 新增的值）</p>
+	<p>list-item	此元素会作为列表显示。</p>
     <p></p>
 	<p></p>
     <p></p>
@@ -116,19 +138,96 @@
 </div>
 
 <div>
-	<p></p>
-	<p></p>
+	<p>js 异步加载</p>
+	<p>启用async与defer来进行异步加载，避免阻止DOM解析和渲染。(async 脚本在script文件下载完成后会立即执行(所以不要有模块依赖),并且其执行时间一定在 window的load事件触发之前。这意味着多个async脚本很可能不会按其在页面中的出现次序顺序执行。与此相对，浏览器确保多个 defer 脚本按其在HTML页面中的出现顺序依次执行,且执行时机为DOM解析完成后执行)</p>
     <p></p>
 	<p></p>
     <p></p>
 	<p></p>
 </div>
 
+<div>
+    <p>js 兼容  css兼容</p>
+	<p>IE下可获取window.event ，其它浏览器只能在事件回调中获取</p>
+    <p>IE8 下parseInt(’08′)返回0， parseInt(i,10);加入第二个参数代表待转换的为10进制数</p>
+	<p></p>
+	<p></p>
+	<p></p>
+</div>
 
+<div>
+    <p>判断一个对象</p>
+	<p> typeof 判断类型</p>
+    <p> instanceof 判断一个对象是否另一个对象的实例</p>
+</div>
 
+<div>
+    <p>单页面路由实现原理</p>
+	<p> 1. history.pushState和history.replaceState不会触发hashchange事件</p>
+	<p> 2.浏览器的前进与后退，会触发window.onpopstate事件,页面前进和后退不会请求url地址</p>
+	<p>3.点击href="#hash1"标签和使用 location.hash =“hash2”会触发 hashchange事件</p>
+</div>
 
+<div>
+    <p>单页面seo</p>
+	<p>尽量在后端渲染</p>
+	<p>部分爬虫支持js执行</p>
+</div>
 
+<div>
+    <p>居中</p>
+	<p>position：absolute 定位left：50%；top:50% margin-left:负的一半宽，margin-rigth：负的的一半高，或者transform:translate(50%,50%)</p>
+    <p>fixed: 相对浏览器定位</p>
+</div>
 
+<div>
+	<p>跨域</p>
+	<p>jsonp 和 CORS 跨域</p>
+</div>
+
+<div>
+	<p>Angular 和 React</p>
+	<p>Angular是真正的大而全的framework，可以直接进行开发</p>
+    <p>React是一个简短有力的library,相当于MVC中的V，开发完整的应用必须结合redux，react-router等组件</p>
+</div>
+
+<div>
+    <p>异步上传</p>
+    <p>formData 添加图片 通过 XMLHttpRequest 上传</p>
+    <p> iframe 完成上传</p>
+    <p></p>
+    <p></p>
+</div>
+
+<div>
+	<p>字符串转成json对象的方式</p>
+    <p>eval('({"name":"255"})');</p>
+    <p>JSON.parse('{"zzz":"asd"}');</p>
+    <p>(new Function("return " + "{'qqq':'ww'}"))(); </p>
+</div>
+
+<div>
+	<p>DOCTYPE</p>
+	<p>告诉浏览器，页面使用哪个 HTML 版本进行编写的指令</p>
+</div>
+
+<dic>
+	<p>transition, transform, animation；我分别理解为过渡，变换，动画</p>
+</dic>
+
+<div>
+	<p>ES6</p>
+	<p>箭头操作符:代替function声明</p>
+	<p>类的支持：可以使用class关键字</p>
+	<p>增强的对象字面量：直接声明__proto__:原型对象，和函数</p>
+	<p>字符串模板：var num = 1; console.log("number is ${num}")</p>
+	<p>参数默认值：function student(name = '小明'){ console.log(name);}</p>
+	<p>let 关键字 ：定义变量在特定范围内使用 for(let i=0;i<3;i++) console.log(i)</p>
+	<p>const 关键字：定义不可更改的常量</p>
+	<p></p>
+	<p></p>
+	<p></p>
+</div>
 
 <script type="text/javascript">
 //1.原型 原型链 
