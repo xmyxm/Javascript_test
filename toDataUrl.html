@@ -33,7 +33,7 @@ $("#addImg").bind("change",function(e){
     var g = canvas.getContext("2d");
     g.drawImage(_this,0,0,_this.width,_this.height);
     var base64 = canvas.toDataURL();
-    callback && callback("succeed");
+    callback && callback(base64);
   };
    img.src = data;
 }
