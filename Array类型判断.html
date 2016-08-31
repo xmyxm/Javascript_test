@@ -1,0 +1,23 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Array类型判断</title>
+</head>
+<style>
+
+</style>
+<body>
+<script type="text/javascript">
+	console.log('数组类型识别');
+	var arr = [1,2,3];
+	console.log('方案一：通过判断对象是否为数组对象的实例，即原型链的构造函数是否为 Array');
+	console.log(arr.__proto__.constructor == Array);
+	console.log('方案二: 通过 instanceof 判断对象是否为 Array 的实例，原理即arr 的原型链上面是否有 Array 的原型');
+	console.log(arr instanceof Array);
+	console.log('方案三: 通过 toString 返回对象类型是否为 Array');
+	console.log(Object.prototype.toString.call(arr) == '[object Array]');
+	console.log('方案四: 通过 ES5方案的 Array.isArray() 方法判断是否为 Array');
+	console.log(Array.isArray(arr));
+</script>
+</body>
+</html>

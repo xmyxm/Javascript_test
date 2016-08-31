@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>for in和for of区别</title>
+</head>
+<style>
+
+</style>
+<body>
+<script type="text/javascript">
+	console.log('for in和for of区别');
+	var arr = ['zxc','sdf','cvb'];
+	for(var i in arr){
+		console.log('for in 遍历 arr 的结果：'+ i);
+	}
+
+	for(var x of arr){
+		console.log('for of 遍历 arr 的结果：'+ x);
+	}
+
+    function qa(){this.x=1;this.y=2;this.z=3;}
+	qa.prototype.m = '4';
+	var newqa = new qa();
+
+	for(var m in newqa){
+		console.log('for in 遍历 newqa 的结果：'+ m);
+	}
+
+/*	for(var n of newqa){
+		console.log('for of 遍历 newqa 的结果：'+ n);
+	}*/
+
+	for(var n of {a:'111',b:'222',c:'333'}){
+		console.log('for of 遍历 对象属性 的结果：'+ n);
+	}
+
+
+	Object.prototype.objCustom = function () {}; 
+	Array.prototype.arrCustom = function () {};
+
+	let iterable = [3, 5, 7];
+	iterable.foo = "hello";
+
+	for (let i in iterable) {
+		console.log(i); // logs 0, 1, 2, "foo", "arrCustom", "objCustom"
+	}
+
+	for (let i of iterable) {
+		console.log(i); // logs 3, 5, 7
+	}
+</script>
+</body>
+</html>

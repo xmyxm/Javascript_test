@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>ES5新特性Object.defineProperty</title>
+</head>
+<style>
+
+</style>
+<body>
+<script type="text/javascript">
+	console.log('Object.defineProperty() 方法会直接在一个对象上定义一个新属性，或者修改一个已经存在的属性， 并返回这个对象。');
+
+	var obj = {};
+	console.log('当且仅当该属性的 configurable 为 true 时，该属性才能够被改变，也能够被删除。默认为 false。');
+	Object.defineProperty(obj,'m',{configurable:false,value:'is m'})
+	console.log(obj.m);
+    delete obj.m
+	console.log(obj.m);
+	obj.m = "new m";
+	console.log(obj.m);
+
+    Object.defineProperty(obj,'n',{configurable:true,value:'is n'});
+    obj.n = "new n";
+	console.log(obj.n);
+	Object.defineProperty(obj,'n',{configurable:false,enumerable:true,value:'update n'});
+
+	console.log('当且仅当仅当该属性的writable为 true 时，该属性才能被赋值运算符改变。默认为 false。');
+    Object.defineProperty(obj,'x',{configurable:true,value:'is x',writable:true});
+    obj.x = "new x";
+	console.log(obj.x);
+
+    console.log('当且仅当该属性的 enumerable 为 true 时，该属性才能够出现在对象的枚举属性中。默认为 false。');
+	Object.defineProperty(obj,'y',{configurable:true,enumerable:true,value:'is y',writable:true});
+	obj.x = "new y";
+	console.log(obj.y);
+	for(var i in obj){console.log('for in : '+obj[i]);}
+</script>
+</body>
+</html>
