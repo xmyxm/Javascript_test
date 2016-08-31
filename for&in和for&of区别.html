@@ -48,6 +48,63 @@
 	for (let i of iterable) {
 		console.log(i); // logs 3, 5, 7
 	}
+
+	let iterable = "boo";
+	console.log('for of还能遍历string类型字符串');
+	for (let value of iterable) {
+	  console.log(value);
+	}
+	// "b"
+	// "o"
+	// "o"
+
+	console.log('for of遍历 TypedArray:');
+
+	let iterable = new Uint8Array([0x00, 0xff]);
+
+	for (let value of iterable) {
+	  console.log(value);
+	}
+	// 0
+	// 255
+	console.log('for of遍历Map:')
+
+	let iterable = new Map([["a", 1], ["b", 2], ["c", 3]]);
+
+	for (let entry of iterable) {
+	  console.log(entry);
+	}
+	// [a, 1]
+	// [b, 2]
+	// [c, 3]
+
+	for (let [key, value] of iterable) {
+	  console.log(value);
+	}
+	// 1
+	// 2
+	// 3
+	console.log('for of遍历 Set:');
+
+	let iterable = new Set([1, 1, 2, 2, 3, 3]);
+
+	for (let value of iterable) {
+	  console.log(value);
+	}
+	// 1
+	// 2
+	// 3
+	console.log('for of遍历 DOM 集合')
+
+	console.log('遍历Dom元素集合,比如一个NodeList对象: 下面的例子演示给每一个article标签的p子标签添加一个 "read" class.')
+
+	let articleParagraphs = document.querySelectorAll("article > p");
+
+	for (let paragraph of articleParagraphs) {
+	  paragraph.classList.add("read");
+	}
+
+
 </script>
 </body>
 </html>

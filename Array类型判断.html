@@ -16,6 +16,7 @@
 	console.log(arr instanceof Array);
 	console.log('方案三: 通过 toString 返回对象类型是否为 Array');
 	console.log(Object.prototype.toString.call(arr) == '[object Array]');
+	console.log(Object.prototype.toString.call(function(){}) == "[object Function]");//true
 	console.log('方案四: 通过 ES5方案的 Array.isArray() 方法判断是否为 Array');
 	console.log(Array.isArray(arr));
 </script>
