@@ -1,0 +1,178 @@
+<!DOCTYPE html> 
+	<html> 
+	<head> 
+	<meta charset="utf-8" /> 
+	<meta name="viewport" content="width=device-width" /> 
+	<meta name="apple-itunes-app" content="app-id=ctrip, affiliate-data=myAffiliateData, app-argument=myURL" /> 
+	<title>Test</title> 
+	
+	
+	<style type="text/css"> 
+	a, input[type=button] { 
+	margin-top: 5px; 
+	margin-bottom: 5px; 
+	display: inline-block; 
+	padding: 6px 12px; 
+	font-size: 14px; 
+	font-weight: 400; 
+	line-height: 1.42857143; 
+	text-align: center; 
+	white-space: nowrap; 
+	vertical-align: middle; 
+	-ms-touch-action: manipulation; 
+	touch-action: manipulation; 
+	cursor: pointer; 
+	-webkit-user-select: none; 
+	-moz-user-select: none; 
+	-ms-user-select: none; 
+	user-select: none; 
+	background-image: none; 
+	border: 1px solid transparent; 
+	border-radius: 4px; 
+	font-family: inherit; 
+	text-transform: none; 
+	overflow: visible; 
+	font: inherit; 
+	box-sizing: border-box; 
+	} 
+	a { 
+	color: #fff; 
+	background-color: #5cb85c; 
+	border-color: #4cae4c; 
+	} 
+	input[type=button] { 
+	color: #fff; 
+	background-color: #5bc0de; 
+	border-color: #46b8da; 
+	} 
+	</style> 
+	</head> 
+	<body> 
+	
+	<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script> 
+	<p id="status" style="background-color: #f0ad4e;"></p> 
+	
+	<a href="intent://www.kaola.com/product/8342.html#Intent;scheme=kaola;package=com.kaola;S.browser_fallback_url=http%3A%2F%2Fapp.kaola.com;end">打开考拉intent</a> 
+	<br /> 
+	<a href="kaola://www.kaola.com/product/8342.html">打开考拉商品详情</a> 
+	<br /> 
+	<a href="ctrip://wireless/?GUID=AM_v20150908_e5cb70ab-6ab2-a37b-fe34-9f51e0bd6b0a&uatype=chrom">进入携程ctrip</a> 
+	<br /> 
+	<a href="intent://m.ctrip.com/webapp/tuan/detail/2178311.html?cityid=2/#Intent;scheme=m.ctrip.com;package=携程旅行;S.browser_fallback_url=http%3a%2f%2fm.ctrip.com%2f;end">进入携程intent</a> 
+	<br /> 
+	<a href="intent://m.taobao.com/#Intent;scheme=m.taobao.com;package=m.taobao.com;S.browser_fallback_url=http%3A%2F%2Fh5.m.taobao.com%2Fhd%2FdownLoadAnroidSimple.html%3F%26pageType%3DmainIndex%26sceneType%3Ddefault;end">进入淘宝intent</a> 
+	<br /> 
+	<a href="taobao://m.taobao.com/?point=%7B%22from%22%3A%22h5%22%2C%22url%22%3A%22https%3A%2F%2Fm.taobao.com%2F%22%2C%22h5_uid%22%3A%22qrm0Du%2FlUgwCATr2Cll2kPyj%22%2C%22uaPoint%22%3A%22Mozilla%2F5.0%2520(Linux%3B%2520Android%25204.4.4%3B%2520en-us%3B%2520Nexus%25205%2520Build%2FJOP40D)%2520AppleWebKit%2F537.36%2520(KHTML%2C%2520like%2520Gecko)%2520Chrome%2F42.0.2307.2%2520Mobile%2520Safari%2F537.36%22%7D">进入淘宝taobao</a> 
+	<br /> 
+	<!--呼叫号码--> 
+	<a href="tel:13788889999">打开拨号</a> 
+	<br /> 
+	<a href="intent://m.taobao.com/">进不去淘宝intent</a> 
+	<br /> 
+	<input type="button" onclick="openAppbyiframe()" value="Iframe唤醒尝试" /> 
+	<br /> 
+	<input type="button" onclick="openAppbyloca()" value="location唤醒尝试" /> 
+	<br /> 
+	<input type="button" onclick="openApp('kaola://www.kaola.com/product/8342.html', isok)" value="setInterval唤醒尝试" /> 
+	<br /> 
+	<input type="button" onclick="ok('ctrip://wireless/?GUID=AM_v20150908_e5cb70ab-6ab2-a37b-fe34-9f51e0bd6b0a&uatype=chrom')" value="兼容版唤醒尝试" /> 
+	<br /> 
+	
+	
+	<script> 
+	$("#status").text(navigator.userAgent); 
+	function openAppbyiframe() { 
+	//创建一个隐藏的iframe 
+	var ifr = document.createElement('iframe'); 
+	ifr.src = "ctrip://wireless/?GUID=AM_v20150908_e5cb70ab-6ab2-a37b-fe34-9f51e0bd6b0a&uatype=chrom"; 
+	ifr.style.display = 'none'; 
+	document.body.appendChild(ifr); 
+	console.log(ifr); 
+	//记录唤醒时间 
+	var openTime = +new Date(); 
+	window.setTimeout(function () { document.body.removeChild(ifr);}, 2000); 
+	} 
+	
+	function openAppbyloca() { 
+	window.location = 'ctrip://wireless/?GUID=AM_v20150908_e5cb70ab-6ab2-a37b-fe34-9f51e0bd6b0a&uatype=chrom'; 
+	} 
+	
+	function openApp(openUrl, callback) { 
+	//检查app是否打开 
+	function checkOpen(cb) { 
+	var _clickTime = +(new Date()); 
+	function check(elsTime) { 
+	if (elsTime > 3000 || document.hidden || document.webkitHidden) { 
+	cb(1); 
+	} else { 
+	window.location = openUrl; 
+	cb(0); 
+	} 
+	} 
+	//启动间隔20ms运行的定时器，并检测累计消耗时间是否超过3000ms，超过则结束 
+	var _count = 0, intHandle; 
+	intHandle = setInterval(function () { 
+	_count++; 
+	var elsTime = +(new Date()) - _clickTime; 
+	if (_count >= 100 || elsTime > 3000) { 
+	clearInterval(intHandle); 
+	check(elsTime); 
+	} 
+	}, 20); 
+	} 
+	
+	//在iframe 中打开APP 
+	var ifr = document.createElement('iframe'); 
+	ifr.src = openUrl; 
+	ifr.style.display = 'none'; 
+	if (callback) { 
+	checkOpen(function (opened) { 
+	callback && callback(opened); 
+	}); 
+	} 
+	
+	document.body.appendChild(ifr); 
+	setTimeout(function () { 
+	document.body.removeChild(ifr); 
+	}, 2000); 
+	} 
+	function isok(param) { 
+	if (param) alert("唤醒成功" + param); 
+	else alert("唤醒失败" + param); 
+	} 
+	
+	var ok = 
+	(function () { 
+	var iframe = document.createElement('iframe'); 
+	var ua = navigator.userAgent; 
+	var ios9 = 0; 
+	if ((ua.match(/iPhone/i) || ua.match(/iPod/i) || ua.match(/iPad/i))) { 
+	ios9 = Boolean(ua.match(/OS 9_\d[_\d]* like Mac OS X/i)); 
+	} 
+	
+	iframe.height = 1; 
+	iframe.width = 1; 
+	iframe.frameBorder = 0; 
+	iframe.style.position = 'absolute'; 
+	iframe.style.left = '-9999px'; 
+	iframe.style.top = '-9999px'; 
+	document.body.appendChild(iframe); 
+	
+	var tryUrl = function (url) { 
+	
+	if (ios9 || (ua.indexOf("Chrome") > 0 && ua.indexOf("Android") > 0)) { 
+	//alert("ios9 || Android"); 
+	window.location.href = url; 
+	} else { 
+	//alert("ios8"); 
+	iframe.src = url; 
+	} 
+	}; 
+	return tryUrl; 
+	})(); 
+	
+	
+	</script> 
+	
+	</body> 
+	</html> 
