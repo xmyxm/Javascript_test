@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>prototype</title>
+</head>
+<body>
+<script type="text/javascript">
+var p1 = new Promise(function(resolve) {
+    setTimeout(function() {
+      resolve(1);
+    } , 300);
+});
+
+var p2 = new Promise(function(resolve) {
+    setTimeout(function() {
+      resolve(2);
+    } , 500);
+});
+
+ Promise.all([p1,p2]).then(res =>{
+ 	console.log(res);
+ });
+
+</script>
+
+
+
+</body>
+</html>
