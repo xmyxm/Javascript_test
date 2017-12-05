@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+	<meta charset="UTF-8">
+	<title>移动端滚动穿透解决方案</title>
+	<style type="text/css">
+
+		.noscroll,.noscroll body {
+			overflow: hidden;
+		}
+
+		.noscroll body {
+			position: relative;
+		}
+
+		.layer{
+			position: fixed;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			background-color: rgba(0, 0, 0, 0.7);
+		}
+
+		.hedtitle{
+			height: 44px;
+			line-height: 44px;
+			text-align: center;
+		}
+
+		.contentlist{
+			display: block;
+		}
+		
+		.contentlist li{
+			display: block;
+			height: 36px;
+			line-height: 36px;
+		}
+
+		.layer{
+			display: none;
+		}
+
+		.layershow .box{
+			position: fixed;
+			z-index: 98;
+			left: 50%;
+			top: 50%;
+			-webkit-transform: translate(-50%, -50%);
+			transform: translate(-50%, -50%);
+			width: 280px;
+			height: 300px;
+			background-color: #fff;
+			border-radius: 8px;
+		}
+
+		.box .b-title{
+			height: 58px;
+			line-height: 58px;
+			text-align: center;
+			color: #9f7246;
+			font-weight: 600;
+			background-color: #efeae8;
+			font-size: 16px;
+			border-top-left-radius: 8px;
+			border-top-right-radius: 8px;
+		}
+
+		.box .b-list{
+			overflow: scroll;
+			height: 242px;
+		}
+	</style>
+</head>
+<body>
+<header class="hedtitle">移动端滚动穿透</header>
+<ul id="ontent" class="contentlist">
+	<li>标题栏1</li>
+	<li>标题栏2</li>
+	<li>标题栏3</li>
+	<li>标题栏4</li>
+	<li>标题栏5</li>
+	<li>标题栏6</li>
+	<li>标题栏7</li>
+	<li>标题栏8</li>
+	<li>标题栏9</li>
+	<li>标题栏10</li>
+	<li>标题栏11</li>
+	<li>标题栏12</li>
+	<li>标题栏13</li>
+	<li>标题栏14</li>
+	<li>标题栏15</li>
+	<li>标题栏16</li>
+	<li>标题栏17</li>
+	<li>标题栏18</li>
+	<li>标题栏19</li>
+	<li>标题栏20</li>
+	<li>标题栏21</li>
+	<li>标题栏22</li>
+	<li>标题栏23</li>
+	<li>标题栏24</li>
+</ul>
+<div id="layer" class="layershow">
+	<div class="box">
+		<div class="b-title">标题</div>
+		<div class="b-list">
+			<ul class="">
+				<li>子菜单1</li>
+				<li>子菜单2</li>
+				<li>子菜单3</li>
+				<li>子菜单4</li>
+				<li>子菜单5</li>
+				<li>子菜单6</li>
+				<li>子菜单7</li>
+				<li>子菜单8</li>
+				<li>子菜单9</li>
+				<li>子菜单10</li>
+				<li>子菜单11</li>
+				<li>子菜单12</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+
+bind = (type, id, call) => {
+	document.getElementById(id).addEventListener(type,call,true);
+}
+
+const layerEle = document.getElementById('layer');
+	
+bind('click', 'ontent',function(){
+	if(layerEle.className == 'layer'){
+		document.documentElement.className = 'noscroll'
+		layerEle.className = 'layershow'
+	}else{
+		layerEle.className = 'layer'
+		document.documentElement.className = 'noscroll'
+	}
+})
+
+bind('click', 'layer',function(){
+	layerEle.className = 'layer'
+})
+
+
+bind('touchstart', 'layer',function(){
+	layerEle.className = 'layer'
+})
+
+
+
+$.smartScroll = function(container, selectorScrollable) {
+	// 如果没有滚动容器选择器，或者已经绑定了滚动时间，忽略
+	if (!selectorScrollable || container.data('isBindScroll')) {
+		return;
+	}
+
+	// 是否是搓浏览器
+	// 自己在这里添加判断和筛选
+	var isSBBrowser;
+
+	var data = {
+		posY: 0,
+		maxscroll: 0
+	};
+
+	// 事件处理
+	container.on({
+		touchstart: function (event) {
+			var events = event.touches[0] || event;
+			
+			// 先求得是不是滚动元素或者滚动元素的子元素
+			var elTarget = $(event.target);
+			
+			if (!elTarget.length) {
+				return;	
+			}
+			
+			var elScroll;
+			
+			// 获取标记的滚动元素，自身或子元素皆可
+			if (elTarget.is(selectorScrollable)) {
+				elScroll = elTarget;
+			} else if ((elScroll = elTarget.parents(selectorScrollable)).length == 0) {
+				elScroll = null;
+			}
+			
+			if (!elScroll) {
+				return;
+			}
+			
+			// 当前滚动元素标记
+			data.elScroll = elScroll;
+			
+			// 垂直位置标记
+			data.posY = events.pageY;
+			data.scrollY = elScroll.scrollTop();
+			// 是否可以滚动
+			data.maxscroll = elScroll[0].scrollHeight - elScroll[0].clientHeight;
+		},
+		touchmove: function () {
+			// 如果不足于滚动，则禁止触发整个窗体元素的滚动
+			if (data.maxscroll <= 0 || isSBBrowser) {
+				// 禁止滚动
+				event.preventDefault();
+			}
+			// 滚动元素
+			var elScroll = data.elScroll;
+			// 当前的滚动高度
+			var scrollTop = elScroll.scrollTop();
+	
+			// 现在移动的垂直位置，用来判断是往上移动还是往下
+			var events = event.touches[0] || event;
+			// 移动距离
+			var distanceY = events.pageY - data.posY;
+	
+			if (isSBBrowser) {
+				elScroll.scrollTop(data.scrollY - distanceY);
+				elScroll.trigger('scroll');
+				return;
+			}
+	
+			// 上下边缘检测
+			if (distanceY > 0 && scrollTop == 0) {
+				// 往上滑，并且到头
+				// 禁止滚动的默认行为
+				event.preventDefault();
+				return;
+			}
+	
+			// 下边缘检测
+			if (distanceY < 0 && (scrollTop + 1 >= data.maxscroll)) {
+				// 往下滑，并且到头
+				// 禁止滚动的默认行为
+				event.preventDefault();
+				return;
+			}
+		},
+		touchend: function () {
+			data.maxscroll = 0;
+		}	
+	});
+
+	// 防止多次重复绑定
+	container.data('isBindScroll', true);
+};
+</script>
+</body>
+</html>
+
+
+
+
+
