@@ -15,15 +15,6 @@
 			position: relative;
 		}
 
-		.layer{
-			position: fixed;
-			top: 0;
-			right: 0;
-			bottom: 0;
-			left: 0;
-			background-color: rgba(0, 0, 0, 0.7);
-		}
-
 		.hedtitle{
 			height: 44px;
 			line-height: 44px;
@@ -42,6 +33,15 @@
 
 		.layer{
 			display: none;
+		}
+
+		.layershow{
+			position: fixed;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			background-color: rgba(0, 0, 0, 0.7);
 		}
 
 		.layershow .box{
@@ -71,6 +71,7 @@
 
 		.box .b-list{
 			overflow: scroll;
+			-webkit-overflow-scrolling:touch;
 			height: 242px;
 		}
 	</style>
@@ -120,6 +121,30 @@
 				<li>子菜单10</li>
 				<li>子菜单11</li>
 				<li>子菜单12</li>
+				<li>子菜单13</li>
+				<li>子菜单14</li>
+				<li>子菜单15</li>
+				<li>子菜单16</li>
+				<li>子菜单17</li>
+				<li>子菜单18</li>
+				<li>子菜单19</li>
+				<li>子菜单20</li>
+				<li>子菜单21</li>
+				<li>子菜单22</li>
+				<li>子菜单23</li>
+				<li>子菜单24</li>
+				<li>子菜单25</li>
+				<li>子菜单26</li>
+				<li>子菜单27</li>
+				<li>子菜单28</li>
+				<li>子菜单29</li>
+				<li>子菜单30</li>
+				<li>子菜单31</li>
+				<li>子菜单32</li>
+				<li>子菜单33</li>
+				<li>子菜单34</li>
+				<li>子菜单35</li>
+				<li>子菜单36</li>
 			</ul>
 		</div>
 	</div>
@@ -147,12 +172,12 @@ bind('click', 'layer',function(){
 })
 
 
-bind('touchstart', 'layer',function(){
-	layerEle.className = 'layer'
+bind('touchstart', 'layer',function(e){
+	alert(1)
 })
 
 
-
+var $ = {};
 $.smartScroll = function(container, selectorScrollable) {
 	// 如果没有滚动容器选择器，或者已经绑定了滚动时间，忽略
 	if (!selectorScrollable || container.data('isBindScroll')) {
