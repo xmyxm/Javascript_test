@@ -107,8 +107,8 @@
 <div id="layer" class="layershow">
 	<div class="box">
 		<div class="b-title">标题</div>
-		<div class="b-list">
-			<ul class="">
+		<div id="srollarea" class="b-list">
+			<ul id="ul" class="">
 				<li>子菜单1</li>
 				<li>子菜单2</li>
 				<li>子菜单3</li>
@@ -171,17 +171,29 @@ bind('click', 'layer',function(){
 	layerEle.className = 'layer'
 })
 
+let markEle = {};
+let srollarea = document.getElementById('srollarea');
+let ul = document.getElementById('ul');
 
 bind('touchstart', 'layer',function(e){
-	alert(1)
+	var event = e.targetTouches[0] || e;
+	markEle.startPageY = event.pageY;
+	//scrollTop 属性可以获取或设置一个元素的内容垂直滚动的像素数
+	markEle.scrollY = srollarea.scrollTop;
+	//scrollHeight 元素实际内容高度，不包括元素的border和margin
+	//clientHeight 返回元素视口高度
+	markEle.maxscroll = srollarea.scrollHeight - srollarea.clientHeight;
+
+	console.log(markEle);
+
 })
 
 bind('touchmove', 'layer',function(e){
-	alert(1)
+	console.log(2)
 })
 
 bind('touchend', 'layer',function(e){
-	alert(1)
+	console.log(3)
 })
 
 
