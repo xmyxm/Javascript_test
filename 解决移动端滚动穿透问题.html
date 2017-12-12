@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<script type="text/javascript" src="http://apps.bdimg.com/libs/zepto/1.1.4/zepto.min.js"></script>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
@@ -79,7 +80,7 @@
 <body>
 <header class="hedtitle">移动端滚动穿透</header>
 <ul id="ontent" class="contentlist">
-	<li>标题栏1</li>
+	<li>标题栏1 由于移动端是触摸事件，所以要用到H5的属性touchstart/touchmove/touched,但是PC端只支持鼠标事件 mousedown , mousemove , mouseup</li>
 	<li>标题栏2</li>
 	<li>标题栏3</li>
 	<li>标题栏4</li>
@@ -151,8 +152,8 @@
 </div>
 <script type="text/javascript">
 
-bind = (type, id, call) => {
-	document.getElementById(id).addEventListener(type,call,true);
+const bind = (type, id, call) => {
+	document.getElementById(id).addEventListener(type,call,false);
 }
 
 const layerEle = document.getElementById('layer');
@@ -172,8 +173,8 @@ bind('click', 'layer',function(){
 })
 
 let markEle = {};
-let srollarea = document.getElementById('srollarea');
-let ul = document.getElementById('ul');
+var srollarea = document.getElementById('srollarea');
+//let ul = document.getElementById('ul');
 
 bind('touchstart', 'layer',function(e){
 	var event = e.targetTouches[0] || e;
@@ -183,19 +184,17 @@ bind('touchstart', 'layer',function(e){
 	//scrollHeight 元素实际内容高度，不包括元素的border和margin
 	//clientHeight 返回元素视口高度
 	markEle.maxscroll = srollarea.scrollHeight - srollarea.clientHeight;
-
 	console.log(markEle);
-
 })
 
 bind('touchmove', 'layer',function(e){
-	console.log(2)
+	console.log(Date.now())
 })
 
 bind('touchend', 'layer',function(e){
 	console.log(3)
 })
-
+//http://www.zhangxinxu.com/study/201612/mobile-scroll-prevent-window-scroll.html
 
 var $ = {};
 $.smartScroll = function(container, selectorScrollable) {
