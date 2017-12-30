@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>prototype</title>
+</head>
+<body>
+<script type="text/javascript">
+var p1 = new Promise(function(resolve) {
+      resolve(1)
+});
+
+var p2 = new Promise(function(resolve) {
+      resolve(p1)
+});
+
+var p3 = new Promise(function(resolve) {
+      resolve(2)
+});
+
+
+p2.then( val => {
+	console.log('then:' + val)
+})
+
+p3.then( val => {
+	console.log('then:' + val)
+})
+
+</script>
+</body>
+</html>
+
+
+
+

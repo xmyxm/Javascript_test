@@ -9,14 +9,20 @@
 var p1 = new Promise(function(resolve) {
     setTimeout(function() {
       resolve(1);
+      console.log(1)
     } , 300);
 });
 
 var p2 = new Promise(function(resolve) {
     setTimeout(function() {
       resolve(2);
+      console.log(2)
     } , 500);
 });
+
+p1.then(function(val){
+	console.log('then: ' + val)
+})
 
  Promise.all([p1,p2]).then(res =>{
  	console.log(res);
@@ -28,3 +34,7 @@ var p2 = new Promise(function(resolve) {
 
 </body>
 </html>
+
+
+
+

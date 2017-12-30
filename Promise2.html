@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>prototype</title>
+</head>
+<body>
+<script type="text/javascript">
+var p1 = new Promise(function(resolve) {
+      resolve(1)
+      console.log(1)
+});
+
+console.log(2)
+
+let rel = p1.then( val => {
+  console.log('then:' + val)
+  return val
+}).then(val => {
+  console.log('then:' + val)
+})
+
+console.log('return: ' + rel);
+
+
+
+
+
+
+
+</script>
+</body>
+</html>
+
+
+
+
