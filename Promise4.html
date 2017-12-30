@@ -6,67 +6,51 @@
 </head>
 <body>
 <script type="text/javascript">
-var p1 = new Promise(function(resolve) {
+var p1 = new Promise(function(resolve,reject) {
 	setTimeout(()=> {
 		console.log(1)
 		resolve(1)
-	},1000)   
+	},300)   
 })
-
-
-// p1.then(val => {
-// 	setTimeout(()=> {
-// 		++ val
-// 		console.log(val)
-// 		return val 
-// 	},1000) 
-// })
-// .then(val => {
-// 	setTimeout(()=> {
-// 		++ val
-// 		console.log(val)
-// 		return val 
-// 	},1000) 
-// })
-// .then(val => {
-// 	setTimeout(()=> {
-// 		++ val
-// 		console.log('第一波结尾：' + val)
-// 		return val 
-// 	},1000) 
-// })
-
-
 
 p1.then(val => {
-	return new Promise(function(resolve) {
+	return new Promise(function(resolve,reject) {
 		setTimeout(()=> {
 			++ val
 			console.log(val)
 			resolve(val)
-		},1000)   
+		},300)   
 	})
 })
 .then(val => {
-	return new Promise(function(resolve) {
+	return new Promise(function(resolve,reject) {
+		setTimeout(()=> {
+			++ val
+			console.log(val)
+			++ a
+			//reject('妈蛋')
+			resolve(val)
+		},300)   
+	})
+})
+.then(val => {
+	return new Promise(function(resolve,reject) {
 		setTimeout(()=> {
 			++ val
 			console.log(val)
 			resolve(val)
-		},1000)   
+		},300)   
 	})
+},err => {
+	console.log('执行了reject: ' + err)
 })
 .then(val => {
-	return new Promise(function(resolve) {
-		setTimeout(()=> {
-			++ val
-			console.log(val)
-			resolve(val)
-		},1000)   
-	})
+	console.log('结尾：' + val)
+},err => {
+	console.log('结尾捕获异常：' + err)
 })
-.then(val => {
-	console.log('第二波结尾：' + val)
+.catch(err => {
+	console.log('打印错误:' + err)
 })
 
 </script>

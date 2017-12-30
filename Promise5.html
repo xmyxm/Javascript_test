@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>prototype</title>
+</head>
+<body>
+<script type="text/javascript">
+var p1 = new Promise(function(resolve) {
+	setTimeout(()=> {
+		console.log(1)
+		resolve(1)
+	},1000)   
+})
+
+
+// p1.then(val => {
+// 	setTimeout(()=> {
+// 		++ val
+// 		console.log(val)
+// 		return val 
+// 	},1000) 
+// })
+// .then(val => {
+// 	setTimeout(()=> {
+// 		++ val
+// 		console.log(val)
+// 		return val 
+// 	},1000) 
+// })
+// .then(val => {
+// 	setTimeout(()=> {
+// 		++ val
+// 		console.log('第一波结尾：' + val)
+// 		return val 
+// 	},1000) 
+// })
+
+
+
+p1.then(val => {
+	return new Promise(function(resolve) {
+		setTimeout(()=> {
+			++ val
+			console.log(val)
+			resolve(val)
+		},1000)   
+	})
+})
+.then(val => {
+	return new Promise(function(resolve) {
+		setTimeout(()=> {
+			++ val
+			console.log(val)
+			resolve(val)
+		},1000)   
+	})
+})
+.then(val => {
+	return new Promise(function(resolve) {
+		setTimeout(()=> {
+			++ val
+			console.log(val)
+			resolve(val)
+		},1000)   
+	})
+})
+.then(val => {
+	console.log('第二波结尾：' + val)
+})
+
+</script>
+</body>
+</html>
+
+
+
+
