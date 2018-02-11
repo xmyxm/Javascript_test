@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<title>弹层滚动穿透问题</title>
+	<style type="text/css">
+		*{
+			margin:0;
+			padding: 0;
+		}
+		body{
+			height: 1000px;
+			font-family: cursive ,sans-serif;
+		}
+
+		.content{
+			color: #fff;
+			background: linear-gradient(to bottom, red, rgba(0, 0, 255, 0.5), white);
+		}
+
+		.content .title{
+			line-height: 44px;
+			font-weight: bold;
+			font-size: 18px;
+			text-align: center;
+		}
+
+		.content .textbody{
+			font-size: 14px;
+			padding: 10px 15px;
+		}
+
+		.blackbox{
+			position: fixed;
+			background:rgba(0, 0, 0, 0.3);
+			width: 100%;
+			height: 100%;
+			top: 0;
+			left: 0;
+		}
+
+		.textbody p{
+			text-indent:25px;
+			line-height: 24px;
+		}
+
+		.explain p{
+			text-indent:15px;
+			line-height: 20px;
+		}
+
+		.minbox{
+			color: #ada4a4;
+			width: 50%;
+			height: 50%;
+			background: #fff;
+			border-radius: 2px;
+			transform: translate(50%,50%);
+			display: flex;
+			align-items: center;
+			flex-direction:column;
+		}
+
+		.minbox .intro{
+			text-align: center;
+			line-height: 34px;
+			font-size: 16px;
+			width: 100%;
+    		border-bottom: 1px solid #f3ecec;
+		}
+
+		.explain{
+			flex: 1;
+			overflow-y: auto;
+			font-size: 12px;
+			padding: 5px;
+		}
+
+		.closebtn{
+			margin-top: 5px;
+			width: 100%;
+			font-size: 14px;
+			line-height: 36px;
+			border-top: 1px solid #f3ecec;
+			text-align: center;
+		}
+
+	</style>
+</head>
+<body>
+	<div class ="content">
+			<div class = "title">第一章 回答在牛奶箱里</div>
+			<div class = "textbody">
+				<p>“去那间废弃的屋子吧！”提议的是翔太，“我知道一间合适的废弃屋。”</p>
+				<p>“合适的废弃屋？什么意思？”敦也看着翔太问。翔太是个小个子，脸上还带着少年的稚气。</p>
+				<p>“合适的意思就是合适喽，正好可以用来藏身的意思。上次来踩点的时候偶然发现的，没想到还真派上了用场。”</p>
+				<p>“对不住啦，你们两个。”幸平高大的身躯缩成一团，恋恋不舍地盯着停在一旁的旧款皇冠车，“我做梦也没想到，竟然会在这种地方没电了。”</p>
+				<p>敦也叹了口气。</p>
+				<p>“现在再说这话，还有什么用。”</p>
+				<p>“可是，到底是怎么回事呢？明明之前什么问题也没有啊！也没把灯开着不关……”</p>
+				<p>“是年限到了。”翔太简短地说，“里程数看见没，已经超过十万公里，老化啦。本来就快报销了，跑到这里就彻底不行了。所以我早说了，要偷就偷辆新车。”</p>
+				<p>“唔……”幸平抱起胳膊，低吟了一声，“可是新车都有防盗装置。”</p>
+				<p>“不提这个了。”敦也摇摇手，“翔太，你说的那间废弃屋在附近吗？”</p>
+				<p>翔太歪头想了想。“走得快的话，二十分钟能到。”</p>
+				<p>“好，那就去看看吧！你带路。”</p>
+				<p>“行啊，但车子怎么办？丢在这里保险吗？”</p>
+				<p>敦也环顾四周，他们所在的地点是住宅区里按月付费的停车场，虽然现在有空位，可以把皇冠车停在那儿，但如果被车位的主人发现，势必会报警。</p>
+				<p>“虽然不大保险，但车子动不了也没办法。你们两个，没有不戴手套 […]</p>
+			</div>
+	</div>
+	<div id = "blackbox" class = "blackbox" style = "display: none;">
+		<div class = "minbox">
+			<div class = "intro">
+				简介
+			</div>
+			<div class = "explain">
+				<p>《解忧杂货店》是日本作家东野圭吾写作的长篇小说。2011年于《小说野性时代》连载，于2012年3月由角川书店发行单行本。</p>
+				<p>该书讲述了在僻静街道旁的一家杂货店，只要写下烦恼投进店前门卷帘门的投信口，第二天就会在店后的牛奶箱里得到回答：因男友身患绝症，年轻女孩月兔在爱情与梦想间徘徊；松冈克郎为了音乐梦想离家漂泊，却在现实中寸步难行；少年浩介面临家庭巨变，挣扎在亲情与未来的迷茫中……他们将困惑写成信投进杂货店，奇妙的事情随即不断发生。</p>
+				<p>该书获得第七届中央公论文艺奖</p>
+				<p>苹果日报翻译小说销售排行榜连续两季第二名，荣登纪伊国屋、诚品、博客来、金石堂各大排行榜第1名，亚马逊中国2015年度畅销图书榜第二。</p>
+				<p>同名华语电影于2017年上映。</p>
+				<p>2017年12月15日，亚马逊中国发布基于亚马逊阅读大数据产生的一系列年度阅读榜单。其中，东野圭吾的《解忧杂货店》连续4年上榜，又一次成为2017年亚马逊最畅销图书。</p>
+			</div>
+			<div class = "closebtn"> 关闭 </div>
+		</div>
+	</div>
+	<script type = "text/javascript">
+		var top = 0
+		let minBox = document.getElementById('blackbox')
+		show = () => {
+		  // 在弹出层显示之前，记录当前的滚动位置
+		  top = document.body.scrollTop || document.documentElement.scrollTop
+		  // 使body脱离文档流
+		  document.body.style.cssText = `position: fixed;width: 100%;top: ${top}px;`
+		  // 显示弹层
+		  minBox.style.display = 'block'
+		}  
+
+		// 隐藏弹出层
+		hide = (e) => {
+		e.stopPropagation()
+		 // body回到了文档流中
+		 document.body.style.cssText = ''
+		 // body回滚到之前位置
+		 document.body.scrollTop = top
+		 // 关闭弹层
+		  minBox.style.display = 'none'
+		}
+
+		document.body.addEventListener('click',show)
+		minBox.addEventListener('click',hide)
+	</script>
+</body>
+</html>
+
+
+
+
+
