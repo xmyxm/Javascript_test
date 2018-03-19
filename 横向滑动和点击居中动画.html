@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+	<title>滑动</title>
+	<style type="text/css">
+		*{
+			margin:0px;
+			padding:0px; 
+		}
+		.main{
+			width: 100%;
+		}
+
+		.slide{
+			white-space: nowrap;
+			overflow-x: auto;
+			overflow-y: hidden; 
+		}
+
+		.slide li{
+			display: inline-block;
+			width: 200px;
+			text-align: center;
+			line-height: 100px;
+			background: #0094ff;
+		}
+
+	</style>
+</head>
+<body>
+	<div class="main">
+		<ul class="slide">
+			<li> 蓝蓝蓝1 </li>
+			<li> 蓝蓝蓝2 </li>
+			<li> 蓝蓝蓝3 </li>
+			<li> 蓝蓝蓝4 </li>
+			<li> 蓝蓝蓝5 </li>
+			<li> 蓝蓝蓝6 </li>
+			<li> 蓝蓝蓝7 </li>
+			<li> 蓝蓝蓝8 </li>
+			<li> 蓝蓝蓝9 </li>
+			<li> 蓝蓝蓝10 </li>
+			<li> 蓝蓝蓝11 </li>
+		</ul>
+	</div>
+	<script type="text/javascript">
+		let wid = document.body.clientWidth
+		let slide = document.querySelector('.slide')
+		let domAry = document.querySelectorAll('.slide li')
+		let pureAry= Array.prototype.slice.call(domAry)
+		let leg = domAry.length
+		let slideWid = domAry[0].clientWidth * leg
+
+		var start = 0;
+		//  开始位置
+		var begin = 0;
+		//  结束为止
+		var end = 0;
+		// 持续时间
+		var during = 100;
+
+		slide.onclick = (e) => {
+			if(slideWid > wid && leg > 1){
+				let index = pureAry.indexOf(e.target)
+				let locaObj = e.target.getBoundingClientRect();
+				let move = locaObj.width/2 + locaObj.left - wid/2;
+				begin = slide.scrollLeft;
+				end = e.target.offsetLeft - slide.scrollLeft + locaObj.width/2 - wid/2
+				console.log('begin: ' + begin + ' ,   end: ' + end);
+				start = 10;
+				step();
+			}
+		}
+
+		function fnGetCurrentPosition(t, b, c, d) {
+			return -c * ((t = t/d - 1) * t * t*t - 1) + b;
+		}
+
+		var step = function() {
+			// 当前的运动位置
+			var left = fnGetCurrentPosition(start, begin, end, during);
+			console.log(left);
+			slide.scrollLeft = left;
+			// 时间递增
+			start++;
+			// 如果还没有运动到位，继续
+			if (start <= during) {
+				 requestAnimationFrame(step);
+			} else {
+				console.log('动画结束');
+			}
+		}
+
+	</script>
+</body>
+</html>
+
+
+
