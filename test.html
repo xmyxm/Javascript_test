@@ -1,4 +1,140 @@
-!function(e, n) {
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<!-- <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.3.1.js"></script> -->
+</head>
+<body>
+
+<!-- <script type="text/javascript">
+	var defaults = {
+    url: 'https://res.wx.qq.com/open/js/jweixin-1.3.1.js', //微信JSSDK的URL
+    configHostnameMap: [ //配置wx的js与域名的映射关系
+        {
+            pattern: /dianping.com$/,
+            host: 'cps.dianping.com'
+        },
+        {
+            pattern: /51ping.com$/,
+            host: 'tcps.51ping.com'
+        },
+        {
+            pattern: /(.meituan.(com|net))|(maoyan.com)$/,
+            host: 'i.meituan.com/firework/api'
+        }
+    ],
+    config: { //默认配置
+        debug: false
+    },
+    onError: function (msg) {
+        console && console.error && console.error(msg);
+    }
+};
+
+var states = ['not-auth', 'being-auth', 'auth-success', 'auth-fail']
+
+if (!window._MTDPAuth_) {
+    window._MTDPAuth_ = {
+        state: states[0],
+        callbackQueue: []
+    }
+}
+
+var queue = window._MTDPAuth_.callbackQueue
+
+var loadScript = function (src, onload) {
+    var script = document.createElement('script');
+    script.src = src;
+    script.onload = onload;
+    document.getElementsByTagName("head")[0].appendChild(script);
+};
+
+
+use = function (callback, opts) {
+    opts = opts || {}
+
+    var options = defaults;
+    if (/[\?&]debug:wx($|&)/.test(window.location.search)) {
+        options.config.debug = true;
+    }
+
+    //成功失败都回调
+    if (window._MTDPAuth_.state === states[2] || window._MTDPAuth_.state === states[3]) {
+        return callback(window.wx);
+    }
+
+    queue.push(callback);
+
+    if (window._MTDPAuth_.state === states[1]) {
+        return;
+    }
+
+    window._MTDPAuth_.state = states[1]
+
+    var configHostname = options.configHostnameMap[0].host;
+    options.configHostnameMap.forEach(function (item) {
+        if (item.pattern.test(location.hostname))
+            configHostname = item.host;
+    });
+
+    var apis = 'checkJsApi,onMenuShareTimeline,onMenuShareAppMessage,onMenuShareQQ,onMenuShareWeibo,onMenuShareQZone,startRecord,stopRecord,onVoiceRecordEnd,playVoice,pauseVoice,stopVoice,onVoicePlayEnd,uploadVoice,downloadVoice,chooseImage,previewImage,uploadImage,downloadImage,getLocalImgData,translateVoice,getNetworkType,openLocation,getLocation,hideOptionMenu,showOptionMenu,hideMenuItems,showMenuItems,hideAllNonBaseMenuItem,showAllNonBaseMenuItem,closeWindow,scanQRCode,chooseWXPay,openAddress,openProductSpecificView,addCard,chooseCard,openCard,startSearchBeacons,stopSearchBeacons,onSearchBeacons,launchMiniProgram,miniProgram';
+    var configSearch = '?apis=' + apis;
+    Object.keys(options.config).forEach(function (name) {
+        configSearch += '&';
+        configSearch += encodeURIComponent(name);
+        configSearch += '=';
+        configSearch += encodeURIComponent(options.config[name]);
+    });
+
+    var doTask = function () {
+        var doCallback = function () {
+
+            window._MTDPAuth_.state = states[2]
+
+            while (queue && queue.length) {
+                var cb = queue.shift()
+                cb && cb(window.wx)
+            }
+        };
+
+        if (configHostname.indexOf('i.meituan.com') !== -1) {
+            window.jsonpWXLoader = function (res) {
+                var config = {
+                    debug: options.config.debug,
+                    appId: 'wxc72f01f43da0083b',
+                    timestamp: res.data.timestamp,
+                    signature: res.data.signature,
+                    nonceStr: res.data.nonceStr,
+                    jsApiList: apis.split(',')
+                };
+                wx.config(config);
+                doCallback();
+            }
+            loadScript('https://' + configHostname + '/weixin/config.json?url=' + encodeURIComponent(location.href) + '&callback=jsonpWXLoader');
+        } else {
+            loadScript('https://' + configHostname + '/weixin/config.js' + configSearch, function () {
+                doCallback();
+            });
+        }
+    }
+
+    if (opts.noSDK) {
+        doTask()
+    } else {
+        loadScript(options.url, function () {
+            doTask()
+        });
+    }
+};
+
+use(function(wx){
+    window.wx = wx;
+   })
+</script> -->
+
+<script type="text/javascript">
+	!function(e, n) {
     "function" == typeof define && (define.amd || define.cmd) ? define(function() {
         return n(e)
     }) : n(e, !0)
@@ -756,6 +892,17 @@
     }
 });
 
+</script>
 
 
 
+<script type="text/javascript">
+    var x = 1,y=3;
+    document.body.innerHTML = '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#updateModal" onclick="fillUpdateModal(' + x + ',' + '\'' + y + '\'' + ')">修改</button>';
+    function fillUpdateModal (x, y){
+        alert('x:' + x + '  y :' + y);
+    }
+</script>
+
+</body>
+</html>

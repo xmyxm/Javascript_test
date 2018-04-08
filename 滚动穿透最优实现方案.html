@@ -126,26 +126,26 @@
 		</div>
 	</div>
 	<script type = "text/javascript">
-		var top = 0
-		let minBox = document.getElementById('blackbox')
-		show = () => {
-		  // 在弹出层显示之前，记录当前的滚动位置
-		  top = document.body.scrollTop || document.documentElement.scrollTop
-		  // 使body脱离文档流
-		  document.body.style.cssText = `position: fixed;width: 100%;top: ${top}px;`
-		  // 显示弹层
-		  minBox.style.display = 'block'
-		}  
+		var sctop = 0;
+		var minBox = document.getElementById('blackbox');
+		var show = () => {
+			// 在弹出层显示之前，记录当前的滚动位置
+			sctop = document.body.scrollTop || document.documentElement.scrollTop;
+			// 使body脱离文档流
+			document.body.style.cssText = `position: fixed;width: 100%;top: ${-sctop}px;`;
+			// 显示弹层
+			minBox.style.display = 'block';
+		}
 
 		// 隐藏弹出层
-		hide = (e) => {
-		e.stopPropagation()
-		 // body回到了文档流中
-		 document.body.style.cssText = ''
-		 // body回滚到之前位置
-		 document.body.scrollTop = top
-		 // 关闭弹层
-		  minBox.style.display = 'none'
+		var hide = (e) => {
+			e.stopPropagation();
+			// body回到了文档流中
+			document.body.style.cssText = '';
+			// body回滚到之前位置
+			document.body.scrollTop = sctop;
+			// 关闭弹层
+			minBox.style.display = 'none';
 		}
 
 		document.body.addEventListener('click',show)
