@@ -2,11 +2,12 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>prototype</title>
+	<title>Promise 异常处理</title>
 </head>
 <body>
 <script type="text/javascript">
 var p1 = new Promise(function(resolve) {
+	  //a()//这里没有a方法会报错
       resolve(1)
 });
 
@@ -29,7 +30,47 @@ p3.then( val => {
 
 
 
+var pr = new Promise(function(resolve) {
+	  a()//这里没有a方法会报错
+      resolve(1)
+});
+pr.then(
+	function(sus){
+		console.log('sus')
+	},
+	function(err){//优先走异常回调，后面的 catch 就会捕获不到错误
+		console.error('err', err)
+	}
+).catch(function(err){
+	console.error('catch')
+})
 
+
+var ps = new Promise(function(resolve) {
+	  a()//这里没有a方法会报错
+      resolve(1)
+});
+ps.then(
+	function(sus){
+		console.log('sus')
+	}
+).catch(function(err){
+	console.error('catch', err)//直接会输出错误，因为前面的异常没有被捕获
+})
+
+
+var pa = new Promise(function(resolve) {
+	  //手动抛异常
+	  throw new Error('哈哈哈，手动异常。。。'); 
+      resolve(1)
+});
+pa.then(
+	function(sus){
+		console.log('sus')
+	}
+).catch(function(err){
+	console.error('catch', err)//直接会输出错误，因为前面的异常没有被捕获
+})
 
 </script>
 </body>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>prototype</title>
+	<title>Promise异步回调</title>
 </head>
 <body>
 <script type="text/javascript">
@@ -24,14 +24,21 @@ p1.then(function(val){
 	console.log('then: ' + val)
 })
 
+console.log(3)
+
  Promise.all([p1,p2]).then(res =>{
  	console.log(res);
  });
 
 </script>
 
-
-
+<div>
+  输出顺序
+  3
+  1
+  then: 1
+  (2) [1, 2]
+</div>
 </body>
 </html>
 

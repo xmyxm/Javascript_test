@@ -2,26 +2,31 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>prototype</title>
+	<title>Promise链式调用</title>
 </head>
 <body>
 <script type="text/javascript">
+// Promise 中的方法 是同步执行的
 var p1 = new Promise(function(resolve) {
-      resolve(1)
-      console.log(1)
+  resolve(1)
+  console.log(1)
 });
 
 console.log(2)
-
+//then 方法中的回调 是绝对异步执行
 let rel = p1.then( val => {
-  console.log('then:' + val)
-  return val
+  console.log('then 1:' + val)
+  return val //如果不 return 后面的 then 收不到返回值
 }).then(val => {
-  console.log('then:' + val)
+  console.log('then 2:' + val)
 })
 
-console.log('return: ' + rel);
+//不管 p1 的 then 执行多少次，Promise 决议的结果是始终不会变的
+p1.then(function(val) { console.log('p1 2:' + val) })
 
+rel.then(function(val) { console.log('then 3:' + val) })
+
+console.log('打印 Promise 对象: ' + rel);
 
 
 
