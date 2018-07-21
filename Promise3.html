@@ -72,6 +72,26 @@ pa.then(
 	console.error('catch', err)//直接会输出错误，因为前面的异常没有被捕获
 })
 
+
+var pu = Promise.resolve(1)
+
+pu.then(val => {
+	console.log(val)
+	++m
+	return ++val
+}).then(w => {
+	console.log(w)
+},
+err => {
+	console.log('then 捕获到 then 中的 异常') //这里捕获了，catch 中就是捕获不到异常 
+	console.log(err)
+}
+).catch(err => {
+	console.log('catch 捕获到 then 中的 异常')
+	console.log(err)
+})
+
+
 </script>
 </body>
 </html>
