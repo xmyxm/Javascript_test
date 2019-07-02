@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="referrer" content="origin" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <title>test</title>
+    <script>
+            var tapMe = tool(500, get)
+    
+            function tool(wait, action) {
+                let isFetch = false
+                let startTime = Date.now()
+                let ctx = this
+                let args = arguments
+                return async function () {
+                    if (isFetch == false) {
+                        let currentTime = Date.now()
+                        let difference = currentTime - startTime
+                        startTime = currentTime
+                        if (difference > wait) {
+                            isFetch = true
+                            const resilt = await action.apply(ctx, args)
+                            isFetch = false
+                            console.log(resilt)
+                            startTime = Date.now()
+                        }
+                    }
+                }
+            }
+    
+            function post() {
+                return new Promise(resolve => {
+                    setTimeout(function(){
+                        resolve(Date.now())
+                    }, 300)
+                })
+            }
+
+            function get() {
+                return Date.now()
+            }
+        </script>
+</head>
+<body>
+    <button onclick="tapMe()" >点击我</button>
+</body>
+</html>
