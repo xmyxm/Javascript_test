@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="Viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>0.5像素边框实现方案</title>
     <style>
         * {
@@ -40,11 +40,12 @@
             align-items: center;
         }
 
-        .fake_item, .bg_item {
+        .fake_item, .bg_item, .bg_img_item, .svg_item {
             position: relative;
             line-height: 30px;
             width: 60px;
             text-align: center;
+            border-radius: 10px;
         }
 
         .fake_item::before {
@@ -68,13 +69,46 @@
             
         }
 
+        .bg_img_item {
+            /* box-shadow: inset 0px -1px 1px -1px #e1e1e1; 底边框阴影*/
+            box-shadow: inset 0px -1px 1px -1px #e1e1e1, 
+            inset -1px 0px 1px -1px #e1e1e1,
+            inset 1px 0px 1px -1px #e1e1e1,
+            inset 0px 1px 1px -1px #e1e1e1;
+        }
+
+        .svg_item::after {
+            position: absolute;
+            top: 0;
+            left: 0;
+            content: '';
+            width: 100%;
+            height: 100%;
+            border: 1px solid #e1e1e1;
+            border-radius: 10px;
+        }
 
     </style>
+
+<script>    
+    var viewport = document.querySelector("meta[name=viewport]");  
+    //下面是根据设备像素设置viewport  
+    if (window.devicePixelRatio == 1) {  
+        viewport.setAttribute('content', 'width=device-width,initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no');  
+    }  
+    if (window.devicePixelRatio == 2) {  
+        viewport.setAttribute('content', 'width=device-width,initial-scale=0.5, maximum-scale=0.5, minimum-scale=0.5, user-scalable=no');  
+    }  
+    if (window.devicePixelRatio == 3) {  
+        viewport.setAttribute('content', 'width=device-width,initial-scale=0.3333333333333333, maximum-scale=0.3333333333333333, minimum-scale=0.3333333333333333, user-scalable=no');  
+    }  
+</script> 
+
 </head>
 
 <body>
     <div class="app">
-        <div class="title">伪元素实现0.5像素边框: CSS selector: ::before </div>
+        <div class="title">伪元素实现: CSS selector: ::before </div>
         <div class="box">
             <div class="fake_item">周一</div>
             <div class="fake_item">周二</div>
@@ -85,7 +119,7 @@
         <div class="text">特点: 兼容性好，可以实现圆角，但会占据一个伪元素</div>
         <div class="text">兼容版本: 几乎全面兼容;不兼容版本有:ie7及以下版本和电脑Safari3.2及以下版本</div>
 
-        <div class="title">渐变背景色实现0.5像素边框: background: linear-gradient</div>
+        <div class="title">渐变背景色实现: background: linear-gradient</div>
         <div class="box">
             <div class="bg_item">周一</div>
             <div class="bg_item">周二</div>
@@ -95,6 +129,29 @@
         </div>
         <div class="text">特点: 兼容性较一般，可在当前元素上直接实现0.5边框效果，不能实现圆角，会占据一个背景</div>
         <div class="text">兼容版本: PC兼容性一般，移动端兼容性较好; 不兼容版本有:ie9及以下版本 Chrome9及以下版本 Sarifi5及以下版本 IOS Sarifi5.1及以下版本 </div>
+
+        <div class="title">通过阴影实现： CSS box-shadow</div>
+        <div class="box">
+            <div class="bg_img_item">周一</div>
+            <div class="bg_img_item">周二</div>
+            <div class="bg_img_item">周三</div>
+            <div class="bg_img_item">周四</div>
+            <div class="bg_img_item">周五</div>
+        </div>
+        <div class="text">特点: 兼容性较好，可在当前元素上直接实现0.5边框效果，能实现圆角，且不占据任何元素</div>
+        <div class="text">兼容版本: 移动端兼容性很棒，PC兼容性较好; 不兼容版本有:ie8及以下版本 Firefox3及以下版本 Opera10.1及以下版本</div>
+
+        <div class="title">通过SVG图片实现： CSS box-shadow</div>
+        <div class="box">
+            <div class="svg_item">周一</div>
+            <div class="svg_item">周二</div>
+            <div class="svg_item">周三</div>
+            <div class="svg_item">周四</div>
+            <div class="svg_item">周五</div>
+        </div>
+        <div class="text">特点: 兼容性较好，可在当前元素上直接实现0.5边框效果，能实现圆角，且不占据任何元素</div>
+        <div class="text">兼容版本: 移动端兼容性很棒，PC兼容性较好; 不兼容版本有:ie8及以下版本 Firefox3及以下版本 Opera10.1及以下版本</div>
     </div>
 </body>
 </html>
+
