@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>0.5像素边框实现方案</title>
+    <title>1px实现方案</title>
     <style>
         * {
             padding: 0;
@@ -38,9 +38,13 @@
             display: flex;
             justify-content: space-around;
             align-items: center;
+            height: 50px;
         }
 
-        .fake_item, .bg_item, .bg_img_item, .svg_item {
+        .fake_item,
+        .bg_item,
+        .bg_img_item,
+        .svg_item {
             position: relative;
             line-height: 30px;
             width: 60px;
@@ -55,26 +59,27 @@
             content: "";
             width: 200%;
             height: 200%;
-            transform-origin: 0 0;  /* 设置一个元素变形的原点。默认值是50% 50%不符合我们呈现的位置 */
+            transform-origin: 0 0;
+            /* 设置一个元素变形的原点。默认值是50% 50%不符合我们呈现的位置 */
             transform: scale(0.5, 0.5);
-            border: 1px solid #e1e1e1;
+            border: 1px solid #000;
             border-radius: 10px;
         }
 
         .bg_item {
-            background: linear-gradient(0, #e1e1e1, #e1e1e1 50%, transparent 50%) top right / 100% 1px no-repeat,
-                        linear-gradient(0, #e1e1e1, #e1e1e1 50%, transparent 50%) bottom right / 100% 1px no-repeat,
-                        linear-gradient(90deg, #e1e1e1, #e1e1e1 50%, transparent 50%) top right / 1px 100% no-repeat,
-                        linear-gradient(90deg, #e1e1e1, #e1e1e1 50%, transparent 50%) top left / 1px 100% no-repeat;
-            
+            background: linear-gradient(0, #000, #000 50%, transparent 50%) top right / 100% 1px no-repeat,
+                linear-gradient(0, #000, #000 50%, transparent 50%) bottom right / 100% 1px no-repeat,
+                linear-gradient(90deg, #000, #000 50%, transparent 50%) top right / 1px 100% no-repeat,
+                linear-gradient(90deg, #000, #000 50%, transparent 50%) top left / 1px 100% no-repeat;
+                border-radius: 0;
         }
 
         .bg_img_item {
-            /* box-shadow: inset 0px -1px 1px -1px #e1e1e1; 底边框阴影*/
-            box-shadow: inset 0px -1px 1px -1px #e1e1e1, 
-            inset -1px 0px 1px -1px #e1e1e1,
-            inset 1px 0px 1px -1px #e1e1e1,
-            inset 0px 1px 1px -1px #e1e1e1;
+            /* box-shadow: inset 0px -1px 1px -1px #000; 底边框阴影*/
+            box-shadow: inset 0px -1px 1px -1px #000,
+                inset -1px 0px 1px -1px #000,
+                inset 1px 0px 1px -1px #000,
+                inset 0px 1px 1px -1px #000;
         }
 
         .svg_item::after {
@@ -84,25 +89,45 @@
             content: '';
             width: 100%;
             height: 100%;
-            border: 1px solid #e1e1e1;
+            border: 1px solid #000;
             border-radius: 10px;
         }
 
+        .bgline {
+            width: 100%;
+            height: 1px;
+            background: #000;
+            transform: scaleY(0.5);
+        }
+
+        .afterline {
+            width: 100%;
+            position: relative;
+        }
+
+        .afterline::after {
+            position: absolute;
+            content:'';
+            bottom: 0;
+            width:100%;
+            border-bottom:1px solid #000;
+            transform: scaleY(0.5);
+        }
     </style>
 
-<script>    
-    var viewport = document.querySelector("meta[name=viewport]");  
-    //下面是根据设备像素设置viewport  
-    if (window.devicePixelRatio == 1) {  
-        viewport.setAttribute('content', 'width=device-width,initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no');  
-    }  
-    if (window.devicePixelRatio == 2) {  
-        viewport.setAttribute('content', 'width=device-width,initial-scale=0.5, maximum-scale=0.5, minimum-scale=0.5, user-scalable=no');  
-    }  
-    if (window.devicePixelRatio == 3) {  
-        viewport.setAttribute('content', 'width=device-width,initial-scale=0.3333333333333333, maximum-scale=0.3333333333333333, minimum-scale=0.3333333333333333, user-scalable=no');  
-    }  
-</script> 
+    <script>
+        var viewport = document.querySelector("meta[name=viewport]");
+        //下面是根据设备像素设置viewport  
+        if (window.devicePixelRatio == 1) {
+            viewport.setAttribute('content', 'width=device-width,initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no');
+        }
+        if (window.devicePixelRatio == 2) {
+            viewport.setAttribute('content', 'width=device-width,initial-scale=0.5, maximum-scale=0.5, minimum-scale=0.5, user-scalable=no');
+        }
+        if (window.devicePixelRatio == 3) {
+            viewport.setAttribute('content', 'width=device-width,initial-scale=0.3333333333333333, maximum-scale=0.3333333333333333, minimum-scale=0.3333333333333333, user-scalable=no');
+        }  
+    </script>
 
 </head>
 
@@ -151,7 +176,22 @@
         </div>
         <div class="text">特点: 兼容性较好，可在当前元素上直接实现0.5边框效果，能实现圆角，且不占据任何元素</div>
         <div class="text">兼容版本: 移动端兼容性很棒，PC兼容性较好; 不兼容版本有:ie8及以下版本 Firefox3及以下版本 Opera10.1及以下版本</div>
+
+        <div class="title">使用单独的Dom元素加transform: scale(0.5) 来实现 1px 线条</div>
+        <div class="box">
+            <div class="bgline"></div>
+        </div>
+        <div class="text">特点：兼容性好，但不可以实现圆角也会占据一个元素</div>
+        <div class="text">兼容版本: 几乎全面兼容；不兼容浏览器有：ie7及以下版本和电脑Safari3.2及以下版本</div>
+
+        <div class="title">伪元素实现: CSS selector: ::after</div>
+        <div class="box">
+            <div class="afterline"></div>
+        </div>
+        <div class="text">特点：兼容性好，但不可以实现圆角也会占据一个伪元素</div>
+        <div class="text">兼容版本: 几乎全面兼容；不兼容浏览器有：ie7及以下版本和电脑Safari3.2及以下版本</div>
+
     </div>
 </body>
-</html>
 
+</html>
